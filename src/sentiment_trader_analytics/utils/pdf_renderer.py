@@ -58,6 +58,7 @@ class ReportPDF(FPDF):
     """
 
     def __init__(self, title: str, section_numbering: bool = True) -> None:
+        """Initialize the PDF report with title and section numbering."""
         super().__init__()
         self.set_auto_page_break(auto=True, margin=25)
         self._title = title

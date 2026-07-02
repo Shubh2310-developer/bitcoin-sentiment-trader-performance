@@ -550,9 +550,7 @@ def main() -> None:
                     len(extended_results),
                 )
                 # Filter out NaN p-value results before correction
-                valid_ext = [
-                    r for r in extended_results if r.p_value == r.p_value  # NaN check
-                ]
+                valid_ext = [r for r in extended_results if r.p_value == r.p_value]  # NaN check
                 if valid_ext:
                     valid_ext = apply_multiple_testing_correction(
                         valid_ext, stat_config.correction_method, alpha

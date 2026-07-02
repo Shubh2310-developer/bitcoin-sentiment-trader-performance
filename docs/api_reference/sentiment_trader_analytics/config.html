@@ -153,6 +153,24 @@
                         <li>
                                 <a class="variable" href="#StatConfig.tables_dir">tables_dir</a>
                         </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.run_extended_analyses">run_extended_analyses</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.regime_duration_buckets">regime_duration_buckets</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.trader_segment_k_min">trader_segment_k_min</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.trader_segment_k_max">trader_segment_k_max</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.max_lag_days">max_lag_days</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#StatConfig.proportion_test_alpha">proportion_test_alpha</a>
+                        </li>
                 </ul>
 
             </li>
@@ -345,179 +363,220 @@
 </span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
 </span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="n">sentiment_lag_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lag in days for sentiment value&quot;</span><span class="p">)</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="n">sentiment_rolling_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling window for sentiment mean&quot;</span><span class="p">)</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="n">sentiment_regime_encoding</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>            <span class="s2">&quot;Extreme Fear&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>            <span class="s2">&quot;Fear&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>            <span class="s2">&quot;Neutral&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="s2">&quot;Greed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="s2">&quot;Extreme Greed&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>        <span class="p">},</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ordinal encoding of sentiment regimes&quot;</span><span class="p">,</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>    <span class="p">)</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>    <span class="n">trader_rolling_windows</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>            <span class="s2">&quot;win_rate&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>            <span class="s2">&quot;pnl_7d&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>            <span class="s2">&quot;pnl_30d&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="s2">&quot;trade_count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>            <span class="s2">&quot;avg_size&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>            <span class="s2">&quot;pnl_volatility&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="p">},</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Window sizes in days for trader rolling features&quot;</span><span class="p">,</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    <span class="p">)</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="n">trader_leverage_window_hours</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hours for leverage rolling window&quot;</span><span class="p">)</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>    <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/features&quot;</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Feature store output directory&quot;</span><span class="p">)</span>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run identifier (auto-generated if empty)&quot;</span><span class="p">)</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EDAConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the EDA pipeline stage.</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">    Attributes:</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">        figures_dir: Directory for saving EDA figures.</span>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="sd">        tables_dir: Directory for saving EDA tables.</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">        outlier_method: Method for outlier detection (iqr or zscore).</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a><span class="sd">        outlier_iqr_multiplier: IQR multiplier for outlier threshold.</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a><span class="sd">        correlation_method: Correlation method (pearson or spearman).</span>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a><span class="sd">        numeric_features: List of numeric columns to include in correlation analysis.</span>
-</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>
-</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>    <span class="n">figures_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/figures/eda&quot;</span><span class="p">),</span>
-</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA figure output&quot;</span><span class="p">,</span>
-</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a>    <span class="p">)</span>
-</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/eda&quot;</span><span class="p">),</span>
-</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA table output&quot;</span><span class="p">,</span>
-</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>    <span class="p">)</span>
-</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>    <span class="n">outlier_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
-</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(iqr|zscore)$&quot;</span><span class="p">,</span>
-</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Outlier detection method&quot;</span><span class="p">,</span>
-</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a>    <span class="p">)</span>
-</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>    <span class="n">outlier_iqr_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;IQR multiplier for outlier threshold&quot;</span><span class="p">,</span>
-</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a>    <span class="p">)</span>
-</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>    <span class="n">correlation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">,</span>
-</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(pearson|spearman|kendall)$&quot;</span><span class="p">,</span>
-</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Correlation method&quot;</span><span class="p">,</span>
-</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a>    <span class="p">)</span>
-</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>    <span class="n">numeric_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span>
-</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a>            <span class="s2">&quot;sentiment_value&quot;</span><span class="p">,</span>
-</span><span id="L-181"><a href="#L-181"><span class="linenos">181</span></a>            <span class="s2">&quot;Closed PnL&quot;</span><span class="p">,</span>
-</span><span id="L-182"><a href="#L-182"><span class="linenos">182</span></a>            <span class="s2">&quot;Leverage&quot;</span><span class="p">,</span>
-</span><span id="L-183"><a href="#L-183"><span class="linenos">183</span></a>            <span class="s2">&quot;trader_win_rate_7d&quot;</span><span class="p">,</span>
-</span><span id="L-184"><a href="#L-184"><span class="linenos">184</span></a>            <span class="s2">&quot;trader_pnl_rolling_7d&quot;</span><span class="p">,</span>
-</span><span id="L-185"><a href="#L-185"><span class="linenos">185</span></a>            <span class="s2">&quot;trader_pnl_rolling_30d&quot;</span><span class="p">,</span>
-</span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a>            <span class="s2">&quot;trader_leverage_avg_24h&quot;</span><span class="p">,</span>
-</span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a>            <span class="s2">&quot;trader_pnl_volatility_14d&quot;</span><span class="p">,</span>
-</span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a>            <span class="s2">&quot;trader_trade_count_7d&quot;</span><span class="p">,</span>
-</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a>            <span class="s2">&quot;trader_avg_size_usd_7d&quot;</span><span class="p">,</span>
-</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>        <span class="p">],</span>
-</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Numeric features for correlation analysis&quot;</span><span class="p">,</span>
-</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a>    <span class="p">)</span>
-</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>
-</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>
-</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a><span class="k">class</span><span class="w"> </span><span class="nc">StatConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the statistical analysis pipeline stage.</span>
-</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>
-</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a><span class="sd">    Attributes:</span>
-</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a><span class="sd">        alpha: Significance level for hypothesis tests (default 0.05).</span>
-</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a><span class="sd">        correction_method: Method for multiple testing correction</span>
-</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a><span class="sd">            (bonferroni or fdr_bh).</span>
-</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a><span class="sd">        min_sample_size: Minimum sample size per group; tests below this</span>
-</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a><span class="sd">            are flagged as underpowered.</span>
-</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="sd">        min_expected_frequency: Minimum expected cell frequency for chi-square;</span>
-</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">            below this, Fisher&#39;s exact test is used.</span>
-</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a><span class="sd">        tables_dir: Directory for saving statistical output tables.</span>
-</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a>
-</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a>    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level&quot;</span><span class="p">)</span>
-</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a>    <span class="n">correction_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;bonferroni&quot;</span><span class="p">,</span>
-</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(bonferroni|fdr_bh)$&quot;</span><span class="p">,</span>
-</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Multiple testing correction method&quot;</span><span class="p">,</span>
-</span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a>    <span class="p">)</span>
-</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a>    <span class="n">min_sample_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-</span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum sample size per group&quot;</span><span class="p">,</span>
-</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a>    <span class="p">)</span>
-</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>    <span class="n">min_expected_frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
-</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum expected frequency for chi-square&quot;</span><span class="p">,</span>
-</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a>    <span class="p">)</span>
-</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/statistics&quot;</span><span class="p">),</span>
-</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for statistical output tables&quot;</span><span class="p">,</span>
-</span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a>    <span class="p">)</span>
-</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a>
-</span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a>
-</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a><span class="k">class</span><span class="w"> </span><span class="nc">MLConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the machine learning pipeline stage.</span>
-</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a>
-</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a><span class="sd">    Attributes:</span>
-</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">        random_seed: Global random seed for reproducibility.</span>
-</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">        train_cutoff_date: Chronological split cutoff date (YYYY-MM-DD).</span>
-</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a><span class="sd">        cv_folds: Number of TimeSeriesSplit folds.</span>
-</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">        tracking_uri: Path to MLflow tracking directory.</span>
-</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a><span class="sd">        experiment_name: MLflow experiment name.</span>
-</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a>
-</span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Global random seed for reproducibility&quot;</span><span class="p">)</span>
-</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a>    <span class="n">train_cutoff_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;2025-04-01&quot;</span><span class="p">,</span>
-</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span>
-</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chronological train/test split cutoff date (YYYY-MM-DD)&quot;</span><span class="p">,</span>
-</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a>    <span class="p">)</span>
-</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a>    <span class="n">cv_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of TimeSeriesSplit folds&quot;</span><span class="p">)</span>
-</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>    <span class="n">tracking_uri</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;experiments/mlruns&quot;</span><span class="p">),</span>
-</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow tracking URI&quot;</span><span class="p">,</span>
-</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>    <span class="p">)</span>
-</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;ml_experiments&quot;</span><span class="p">,</span>
-</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow experiment name&quot;</span><span class="p">,</span>
-</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>    <span class="p">)</span>
-</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>
-</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>
-</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a><span class="k">class</span><span class="w"> </span><span class="nc">AppConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-level application configuration.</span>
-</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>
-</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a><span class="sd">    Wraps pipeline-specific configs under top-level keys.</span>
-</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>
-</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a>    <span class="n">ingestion</span><span class="p">:</span> <span class="n">IngestionConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">IngestionConfig</span><span class="p">)</span>
-</span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a>    <span class="n">validation</span><span class="p">:</span> <span class="n">ValidationConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ValidationConfig</span><span class="p">)</span>
-</span><span id="L-267"><a href="#L-267"><span class="linenos">267</span></a>    <span class="n">preprocessing</span><span class="p">:</span> <span class="n">PreprocessingConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">PreprocessingConfig</span><span class="p">)</span>
-</span><span id="L-268"><a href="#L-268"><span class="linenos">268</span></a>    <span class="n">feature_engineering</span><span class="p">:</span> <span class="n">FeatureConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">FeatureConfig</span><span class="p">)</span>
-</span><span id="L-269"><a href="#L-269"><span class="linenos">269</span></a>    <span class="n">eda</span><span class="p">:</span> <span class="n">EDAConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">EDAConfig</span><span class="p">)</span>
-</span><span id="L-270"><a href="#L-270"><span class="linenos">270</span></a>    <span class="n">statistics</span><span class="p">:</span> <span class="n">StatConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StatConfig</span><span class="p">)</span>
-</span><span id="L-271"><a href="#L-271"><span class="linenos">271</span></a>    <span class="n">ml</span><span class="p">:</span> <span class="n">MLConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">MLConfig</span><span class="p">)</span>
-</span><span id="L-272"><a href="#L-272"><span class="linenos">272</span></a>
-</span><span id="L-273"><a href="#L-273"><span class="linenos">273</span></a>
-</span><span id="L-274"><a href="#L-274"><span class="linenos">274</span></a><span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
-</span><span id="L-275"><a href="#L-275"><span class="linenos">275</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load and validate application configuration from a YAML file.</span>
-</span><span id="L-276"><a href="#L-276"><span class="linenos">276</span></a>
-</span><span id="L-277"><a href="#L-277"><span class="linenos">277</span></a><span class="sd">    Args:</span>
-</span><span id="L-278"><a href="#L-278"><span class="linenos">278</span></a><span class="sd">        path: Path to the YAML configuration file.</span>
-</span><span id="L-279"><a href="#L-279"><span class="linenos">279</span></a>
-</span><span id="L-280"><a href="#L-280"><span class="linenos">280</span></a><span class="sd">    Returns:</span>
-</span><span id="L-281"><a href="#L-281"><span class="linenos">281</span></a><span class="sd">        A validated AppConfig instance.</span>
-</span><span id="L-282"><a href="#L-282"><span class="linenos">282</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-283"><a href="#L-283"><span class="linenos">283</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</span><span id="L-284"><a href="#L-284"><span class="linenos">284</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-</span><span id="L-285"><a href="#L-285"><span class="linenos">285</span></a>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration file not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-286"><a href="#L-286"><span class="linenos">286</span></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>        <span class="n">raw</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>    <span class="k">return</span> <span class="n">AppConfig</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="n">sentiment_rolling_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling window for sentiment mean&quot;</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>    <span class="p">)</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="n">sentiment_regime_encoding</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>            <span class="s2">&quot;Extreme Fear&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="s2">&quot;Fear&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="s2">&quot;Neutral&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>            <span class="s2">&quot;Greed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>            <span class="s2">&quot;Extreme Greed&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>        <span class="p">},</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ordinal encoding of sentiment regimes&quot;</span><span class="p">,</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>    <span class="p">)</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="n">trader_rolling_windows</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>            <span class="s2">&quot;win_rate&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="s2">&quot;pnl_7d&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>            <span class="s2">&quot;pnl_30d&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>            <span class="s2">&quot;trade_count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>            <span class="s2">&quot;avg_size&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>            <span class="s2">&quot;pnl_volatility&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="p">},</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Window sizes in days for trader rolling features&quot;</span><span class="p">,</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>    <span class="p">)</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="n">trader_leverage_window_hours</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hours for leverage rolling window&quot;</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>    <span class="p">)</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>    <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/features&quot;</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Feature store output directory&quot;</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>    <span class="p">)</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run identifier (auto-generated if empty)&quot;</span><span class="p">)</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EDAConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the EDA pipeline stage.</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a><span class="sd">    Attributes:</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a><span class="sd">        figures_dir: Directory for saving EDA figures.</span>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a><span class="sd">        tables_dir: Directory for saving EDA tables.</span>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a><span class="sd">        outlier_method: Method for outlier detection (iqr or zscore).</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a><span class="sd">        outlier_iqr_multiplier: IQR multiplier for outlier threshold.</span>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a><span class="sd">        correlation_method: Correlation method (pearson or spearman).</span>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="sd">        numeric_features: List of numeric columns to include in correlation analysis.</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>    <span class="n">figures_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/figures/eda&quot;</span><span class="p">),</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA figure output&quot;</span><span class="p">,</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>    <span class="p">)</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/eda&quot;</span><span class="p">),</span>
+</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA table output&quot;</span><span class="p">,</span>
+</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>    <span class="p">)</span>
+</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>    <span class="n">outlier_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
+</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(iqr|zscore)$&quot;</span><span class="p">,</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Outlier detection method&quot;</span><span class="p">,</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>    <span class="p">)</span>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>    <span class="n">outlier_iqr_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;IQR multiplier for outlier threshold&quot;</span><span class="p">,</span>
+</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>    <span class="p">)</span>
+</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a>    <span class="n">correlation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">,</span>
+</span><span id="L-181"><a href="#L-181"><span class="linenos">181</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(pearson|spearman|kendall)$&quot;</span><span class="p">,</span>
+</span><span id="L-182"><a href="#L-182"><span class="linenos">182</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Correlation method&quot;</span><span class="p">,</span>
+</span><span id="L-183"><a href="#L-183"><span class="linenos">183</span></a>    <span class="p">)</span>
+</span><span id="L-184"><a href="#L-184"><span class="linenos">184</span></a>    <span class="n">numeric_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-185"><a href="#L-185"><span class="linenos">185</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span>
+</span><span id="L-186"><a href="#L-186"><span class="linenos">186</span></a>            <span class="s2">&quot;sentiment_value&quot;</span><span class="p">,</span>
+</span><span id="L-187"><a href="#L-187"><span class="linenos">187</span></a>            <span class="s2">&quot;Closed PnL&quot;</span><span class="p">,</span>
+</span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a>            <span class="s2">&quot;Leverage&quot;</span><span class="p">,</span>
+</span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a>            <span class="s2">&quot;trader_win_rate_7d&quot;</span><span class="p">,</span>
+</span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>            <span class="s2">&quot;trader_pnl_rolling_7d&quot;</span><span class="p">,</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>            <span class="s2">&quot;trader_pnl_rolling_30d&quot;</span><span class="p">,</span>
+</span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a>            <span class="s2">&quot;trader_leverage_avg_24h&quot;</span><span class="p">,</span>
+</span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>            <span class="s2">&quot;trader_pnl_volatility_14d&quot;</span><span class="p">,</span>
+</span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>            <span class="s2">&quot;trader_trade_count_7d&quot;</span><span class="p">,</span>
+</span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>            <span class="s2">&quot;trader_avg_size_usd_7d&quot;</span><span class="p">,</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>        <span class="p">],</span>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Numeric features for correlation analysis&quot;</span><span class="p">,</span>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>    <span class="p">)</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a>
+</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a>
+</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a><span class="k">class</span><span class="w"> </span><span class="nc">StatConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the statistical analysis pipeline stage.</span>
+</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>
+</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="sd">    Attributes:</span>
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">        alpha: Significance level for hypothesis tests (default 0.05).</span>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a><span class="sd">        correction_method: Method for multiple testing correction</span>
+</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">            (bonferroni or fdr_bh).</span>
+</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">        min_sample_size: Minimum sample size per group; tests below this</span>
+</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">            are flagged as underpowered.</span>
+</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a><span class="sd">        min_expected_frequency: Minimum expected cell frequency for chi-square;</span>
+</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a><span class="sd">            below this, Fisher&#39;s exact test is used.</span>
+</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a><span class="sd">        tables_dir: Directory for saving statistical output tables.</span>
+</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a><span class="sd">        run_extended_analyses: Whether to run ET-01 through ET-07 extended tests.</span>
+</span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a><span class="sd">        regime_duration_buckets: Upper bounds for regime duration bucket groupings.</span>
+</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a><span class="sd">        trader_segment_k_min: Minimum k for k-means trader segmentation.</span>
+</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a><span class="sd">        trader_segment_k_max: Maximum k for k-means trader segmentation.</span>
+</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a><span class="sd">        max_lag_days: Maximum lag in days for ET-05 extended lagged correlations.</span>
+</span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a><span class="sd">        proportion_test_alpha: Significance level for proportion tests in ET-07.</span>
+</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>
+</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a>    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level&quot;</span><span class="p">)</span>
+</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a>    <span class="n">correction_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;bonferroni&quot;</span><span class="p">,</span>
+</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(bonferroni|fdr_bh)$&quot;</span><span class="p">,</span>
+</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Multiple testing correction method&quot;</span><span class="p">,</span>
+</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a>    <span class="p">)</span>
+</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a>    <span class="n">min_sample_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum sample size per group&quot;</span><span class="p">,</span>
+</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a>    <span class="p">)</span>
+</span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a>    <span class="n">min_expected_frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum expected frequency for chi-square&quot;</span><span class="p">,</span>
+</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a>    <span class="p">)</span>
+</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/statistics&quot;</span><span class="p">),</span>
+</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for statistical output tables&quot;</span><span class="p">,</span>
+</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a>    <span class="p">)</span>
+</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a>    <span class="n">run_extended_analyses</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to run extended analyses ET-01 through ET-07&quot;</span><span class="p">,</span>
+</span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>    <span class="p">)</span>
+</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a>    <span class="n">regime_duration_buckets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Upper bounds for regime duration bucket groupings (days)&quot;</span><span class="p">,</span>
+</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a>    <span class="p">)</span>
+</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>    <span class="n">trader_segment_k_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum k for k-means trader segmentation&quot;</span><span class="p">,</span>
+</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a>    <span class="p">)</span>
+</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>    <span class="n">trader_segment_k_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum k for k-means trader segmentation&quot;</span><span class="p">,</span>
+</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>    <span class="p">)</span>
+</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a>    <span class="n">max_lag_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum lag in days for extended lagged correlation analysis&quot;</span><span class="p">,</span>
+</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a>    <span class="p">)</span>
+</span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>    <span class="n">proportion_test_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+</span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="L-267"><a href="#L-267"><span class="linenos">267</span></a>        <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+</span><span id="L-268"><a href="#L-268"><span class="linenos">268</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level for proportion tests in ET-07&quot;</span><span class="p">,</span>
+</span><span id="L-269"><a href="#L-269"><span class="linenos">269</span></a>    <span class="p">)</span>
+</span><span id="L-270"><a href="#L-270"><span class="linenos">270</span></a>
+</span><span id="L-271"><a href="#L-271"><span class="linenos">271</span></a>
+</span><span id="L-272"><a href="#L-272"><span class="linenos">272</span></a><span class="k">class</span><span class="w"> </span><span class="nc">MLConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="L-273"><a href="#L-273"><span class="linenos">273</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the machine learning pipeline stage.</span>
+</span><span id="L-274"><a href="#L-274"><span class="linenos">274</span></a>
+</span><span id="L-275"><a href="#L-275"><span class="linenos">275</span></a><span class="sd">    Attributes:</span>
+</span><span id="L-276"><a href="#L-276"><span class="linenos">276</span></a><span class="sd">        random_seed: Global random seed for reproducibility.</span>
+</span><span id="L-277"><a href="#L-277"><span class="linenos">277</span></a><span class="sd">        train_cutoff_date: Chronological split cutoff date (YYYY-MM-DD).</span>
+</span><span id="L-278"><a href="#L-278"><span class="linenos">278</span></a><span class="sd">        cv_folds: Number of TimeSeriesSplit folds.</span>
+</span><span id="L-279"><a href="#L-279"><span class="linenos">279</span></a><span class="sd">        tracking_uri: Path to MLflow tracking directory.</span>
+</span><span id="L-280"><a href="#L-280"><span class="linenos">280</span></a><span class="sd">        experiment_name: MLflow experiment name.</span>
+</span><span id="L-281"><a href="#L-281"><span class="linenos">281</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-282"><a href="#L-282"><span class="linenos">282</span></a>
+</span><span id="L-283"><a href="#L-283"><span class="linenos">283</span></a>    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Global random seed for reproducibility&quot;</span><span class="p">)</span>
+</span><span id="L-284"><a href="#L-284"><span class="linenos">284</span></a>    <span class="n">train_cutoff_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-285"><a href="#L-285"><span class="linenos">285</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;2025-04-01&quot;</span><span class="p">,</span>
+</span><span id="L-286"><a href="#L-286"><span class="linenos">286</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span>
+</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chronological train/test split cutoff date (YYYY-MM-DD)&quot;</span><span class="p">,</span>
+</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>    <span class="p">)</span>
+</span><span id="L-289"><a href="#L-289"><span class="linenos">289</span></a>    <span class="n">cv_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of TimeSeriesSplit folds&quot;</span><span class="p">)</span>
+</span><span id="L-290"><a href="#L-290"><span class="linenos">290</span></a>    <span class="n">tracking_uri</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-291"><a href="#L-291"><span class="linenos">291</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;experiments/mlruns&quot;</span><span class="p">),</span>
+</span><span id="L-292"><a href="#L-292"><span class="linenos">292</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow tracking URI&quot;</span><span class="p">,</span>
+</span><span id="L-293"><a href="#L-293"><span class="linenos">293</span></a>    <span class="p">)</span>
+</span><span id="L-294"><a href="#L-294"><span class="linenos">294</span></a>    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-295"><a href="#L-295"><span class="linenos">295</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;ml_experiments&quot;</span><span class="p">,</span>
+</span><span id="L-296"><a href="#L-296"><span class="linenos">296</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow experiment name&quot;</span><span class="p">,</span>
+</span><span id="L-297"><a href="#L-297"><span class="linenos">297</span></a>    <span class="p">)</span>
+</span><span id="L-298"><a href="#L-298"><span class="linenos">298</span></a>
+</span><span id="L-299"><a href="#L-299"><span class="linenos">299</span></a>
+</span><span id="L-300"><a href="#L-300"><span class="linenos">300</span></a><span class="k">class</span><span class="w"> </span><span class="nc">AppConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="L-301"><a href="#L-301"><span class="linenos">301</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-level application configuration.</span>
+</span><span id="L-302"><a href="#L-302"><span class="linenos">302</span></a>
+</span><span id="L-303"><a href="#L-303"><span class="linenos">303</span></a><span class="sd">    Wraps pipeline-specific configs under top-level keys.</span>
+</span><span id="L-304"><a href="#L-304"><span class="linenos">304</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-305"><a href="#L-305"><span class="linenos">305</span></a>
+</span><span id="L-306"><a href="#L-306"><span class="linenos">306</span></a>    <span class="n">ingestion</span><span class="p">:</span> <span class="n">IngestionConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">IngestionConfig</span><span class="p">)</span>
+</span><span id="L-307"><a href="#L-307"><span class="linenos">307</span></a>    <span class="n">validation</span><span class="p">:</span> <span class="n">ValidationConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ValidationConfig</span><span class="p">)</span>
+</span><span id="L-308"><a href="#L-308"><span class="linenos">308</span></a>    <span class="n">preprocessing</span><span class="p">:</span> <span class="n">PreprocessingConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">PreprocessingConfig</span><span class="p">)</span>
+</span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a>    <span class="n">feature_engineering</span><span class="p">:</span> <span class="n">FeatureConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">FeatureConfig</span><span class="p">)</span>
+</span><span id="L-310"><a href="#L-310"><span class="linenos">310</span></a>    <span class="n">eda</span><span class="p">:</span> <span class="n">EDAConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">EDAConfig</span><span class="p">)</span>
+</span><span id="L-311"><a href="#L-311"><span class="linenos">311</span></a>    <span class="n">statistics</span><span class="p">:</span> <span class="n">StatConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StatConfig</span><span class="p">)</span>
+</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a>    <span class="n">ml</span><span class="p">:</span> <span class="n">MLConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">MLConfig</span><span class="p">)</span>
+</span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a>
+</span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a>
+</span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a><span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
+</span><span id="L-316"><a href="#L-316"><span class="linenos">316</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load and validate application configuration from a YAML file.</span>
+</span><span id="L-317"><a href="#L-317"><span class="linenos">317</span></a>
+</span><span id="L-318"><a href="#L-318"><span class="linenos">318</span></a><span class="sd">    Args:</span>
+</span><span id="L-319"><a href="#L-319"><span class="linenos">319</span></a><span class="sd">        path: Path to the YAML configuration file.</span>
+</span><span id="L-320"><a href="#L-320"><span class="linenos">320</span></a>
+</span><span id="L-321"><a href="#L-321"><span class="linenos">321</span></a><span class="sd">    Returns:</span>
+</span><span id="L-322"><a href="#L-322"><span class="linenos">322</span></a><span class="sd">        A validated AppConfig instance.</span>
+</span><span id="L-323"><a href="#L-323"><span class="linenos">323</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-324"><a href="#L-324"><span class="linenos">324</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span id="L-325"><a href="#L-325"><span class="linenos">325</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="L-326"><a href="#L-326"><span class="linenos">326</span></a>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration file not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-327"><a href="#L-327"><span class="linenos">327</span></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="L-328"><a href="#L-328"><span class="linenos">328</span></a>        <span class="n">raw</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="L-329"><a href="#L-329"><span class="linenos">329</span></a>    <span class="k">return</span> <span class="n">AppConfig</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -578,7 +637,7 @@
 
                             <div id="IngestionConfig.fear_greed_path" class="classattr">
                                 <div class="attr variable">
-            <span class="name">fear_greed_path</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">fear_greed_path</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;data/raw/fear_greed/fear_greed_index.csv&#39;)</span>
 
         
@@ -592,7 +651,7 @@
                             </div>
                             <div id="IngestionConfig.trader_history_path" class="classattr">
                                 <div class="attr variable">
-            <span class="name">trader_history_path</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">trader_history_path</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;data/raw/trader_history/historical_data.csv&#39;)</span>
 
         
@@ -620,7 +679,7 @@
                             </div>
                             <div id="IngestionConfig.lineage_output_dir" class="classattr">
                                 <div class="attr variable">
-            <span class="name">lineage_output_dir</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">lineage_output_dir</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;data/metadata/lineage&#39;)</span>
 
         
@@ -805,7 +864,7 @@
                             </div>
                             <div id="PreprocessingConfig.processed_output_path" class="classattr">
                                 <div class="attr variable">
-            <span class="name">processed_output_path</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">processed_output_path</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;data/processed&#39;)</span>
 
         
@@ -886,31 +945,37 @@
 </span><span id="FeatureConfig-114"><a href="#FeatureConfig-114"><span class="linenos">114</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="FeatureConfig-115"><a href="#FeatureConfig-115"><span class="linenos">115</span></a>
 </span><span id="FeatureConfig-116"><a href="#FeatureConfig-116"><span class="linenos">116</span></a>    <span class="n">sentiment_lag_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lag in days for sentiment value&quot;</span><span class="p">)</span>
-</span><span id="FeatureConfig-117"><a href="#FeatureConfig-117"><span class="linenos">117</span></a>    <span class="n">sentiment_rolling_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling window for sentiment mean&quot;</span><span class="p">)</span>
-</span><span id="FeatureConfig-118"><a href="#FeatureConfig-118"><span class="linenos">118</span></a>    <span class="n">sentiment_regime_encoding</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="FeatureConfig-119"><a href="#FeatureConfig-119"><span class="linenos">119</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
-</span><span id="FeatureConfig-120"><a href="#FeatureConfig-120"><span class="linenos">120</span></a>            <span class="s2">&quot;Extreme Fear&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="FeatureConfig-121"><a href="#FeatureConfig-121"><span class="linenos">121</span></a>            <span class="s2">&quot;Fear&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span id="FeatureConfig-122"><a href="#FeatureConfig-122"><span class="linenos">122</span></a>            <span class="s2">&quot;Neutral&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span id="FeatureConfig-123"><a href="#FeatureConfig-123"><span class="linenos">123</span></a>            <span class="s2">&quot;Greed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-</span><span id="FeatureConfig-124"><a href="#FeatureConfig-124"><span class="linenos">124</span></a>            <span class="s2">&quot;Extreme Greed&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span id="FeatureConfig-125"><a href="#FeatureConfig-125"><span class="linenos">125</span></a>        <span class="p">},</span>
-</span><span id="FeatureConfig-126"><a href="#FeatureConfig-126"><span class="linenos">126</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ordinal encoding of sentiment regimes&quot;</span><span class="p">,</span>
-</span><span id="FeatureConfig-127"><a href="#FeatureConfig-127"><span class="linenos">127</span></a>    <span class="p">)</span>
-</span><span id="FeatureConfig-128"><a href="#FeatureConfig-128"><span class="linenos">128</span></a>    <span class="n">trader_rolling_windows</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="FeatureConfig-129"><a href="#FeatureConfig-129"><span class="linenos">129</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
-</span><span id="FeatureConfig-130"><a href="#FeatureConfig-130"><span class="linenos">130</span></a>            <span class="s2">&quot;win_rate&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="FeatureConfig-131"><a href="#FeatureConfig-131"><span class="linenos">131</span></a>            <span class="s2">&quot;pnl_7d&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="FeatureConfig-132"><a href="#FeatureConfig-132"><span class="linenos">132</span></a>            <span class="s2">&quot;pnl_30d&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="FeatureConfig-133"><a href="#FeatureConfig-133"><span class="linenos">133</span></a>            <span class="s2">&quot;trade_count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="FeatureConfig-134"><a href="#FeatureConfig-134"><span class="linenos">134</span></a>            <span class="s2">&quot;avg_size&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-</span><span id="FeatureConfig-135"><a href="#FeatureConfig-135"><span class="linenos">135</span></a>            <span class="s2">&quot;pnl_volatility&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-</span><span id="FeatureConfig-136"><a href="#FeatureConfig-136"><span class="linenos">136</span></a>        <span class="p">},</span>
-</span><span id="FeatureConfig-137"><a href="#FeatureConfig-137"><span class="linenos">137</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Window sizes in days for trader rolling features&quot;</span><span class="p">,</span>
-</span><span id="FeatureConfig-138"><a href="#FeatureConfig-138"><span class="linenos">138</span></a>    <span class="p">)</span>
-</span><span id="FeatureConfig-139"><a href="#FeatureConfig-139"><span class="linenos">139</span></a>    <span class="n">trader_leverage_window_hours</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hours for leverage rolling window&quot;</span><span class="p">)</span>
-</span><span id="FeatureConfig-140"><a href="#FeatureConfig-140"><span class="linenos">140</span></a>    <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/features&quot;</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Feature store output directory&quot;</span><span class="p">)</span>
-</span><span id="FeatureConfig-141"><a href="#FeatureConfig-141"><span class="linenos">141</span></a>    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run identifier (auto-generated if empty)&quot;</span><span class="p">)</span>
+</span><span id="FeatureConfig-117"><a href="#FeatureConfig-117"><span class="linenos">117</span></a>    <span class="n">sentiment_rolling_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="FeatureConfig-118"><a href="#FeatureConfig-118"><span class="linenos">118</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Rolling window for sentiment mean&quot;</span>
+</span><span id="FeatureConfig-119"><a href="#FeatureConfig-119"><span class="linenos">119</span></a>    <span class="p">)</span>
+</span><span id="FeatureConfig-120"><a href="#FeatureConfig-120"><span class="linenos">120</span></a>    <span class="n">sentiment_regime_encoding</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="FeatureConfig-121"><a href="#FeatureConfig-121"><span class="linenos">121</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
+</span><span id="FeatureConfig-122"><a href="#FeatureConfig-122"><span class="linenos">122</span></a>            <span class="s2">&quot;Extreme Fear&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span id="FeatureConfig-123"><a href="#FeatureConfig-123"><span class="linenos">123</span></a>            <span class="s2">&quot;Fear&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="FeatureConfig-124"><a href="#FeatureConfig-124"><span class="linenos">124</span></a>            <span class="s2">&quot;Neutral&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span id="FeatureConfig-125"><a href="#FeatureConfig-125"><span class="linenos">125</span></a>            <span class="s2">&quot;Greed&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span><span id="FeatureConfig-126"><a href="#FeatureConfig-126"><span class="linenos">126</span></a>            <span class="s2">&quot;Extreme Greed&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+</span><span id="FeatureConfig-127"><a href="#FeatureConfig-127"><span class="linenos">127</span></a>        <span class="p">},</span>
+</span><span id="FeatureConfig-128"><a href="#FeatureConfig-128"><span class="linenos">128</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ordinal encoding of sentiment regimes&quot;</span><span class="p">,</span>
+</span><span id="FeatureConfig-129"><a href="#FeatureConfig-129"><span class="linenos">129</span></a>    <span class="p">)</span>
+</span><span id="FeatureConfig-130"><a href="#FeatureConfig-130"><span class="linenos">130</span></a>    <span class="n">trader_rolling_windows</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="FeatureConfig-131"><a href="#FeatureConfig-131"><span class="linenos">131</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">{</span>
+</span><span id="FeatureConfig-132"><a href="#FeatureConfig-132"><span class="linenos">132</span></a>            <span class="s2">&quot;win_rate&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="FeatureConfig-133"><a href="#FeatureConfig-133"><span class="linenos">133</span></a>            <span class="s2">&quot;pnl_7d&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="FeatureConfig-134"><a href="#FeatureConfig-134"><span class="linenos">134</span></a>            <span class="s2">&quot;pnl_30d&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span><span id="FeatureConfig-135"><a href="#FeatureConfig-135"><span class="linenos">135</span></a>            <span class="s2">&quot;trade_count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="FeatureConfig-136"><a href="#FeatureConfig-136"><span class="linenos">136</span></a>            <span class="s2">&quot;avg_size&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+</span><span id="FeatureConfig-137"><a href="#FeatureConfig-137"><span class="linenos">137</span></a>            <span class="s2">&quot;pnl_volatility&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+</span><span id="FeatureConfig-138"><a href="#FeatureConfig-138"><span class="linenos">138</span></a>        <span class="p">},</span>
+</span><span id="FeatureConfig-139"><a href="#FeatureConfig-139"><span class="linenos">139</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Window sizes in days for trader rolling features&quot;</span><span class="p">,</span>
+</span><span id="FeatureConfig-140"><a href="#FeatureConfig-140"><span class="linenos">140</span></a>    <span class="p">)</span>
+</span><span id="FeatureConfig-141"><a href="#FeatureConfig-141"><span class="linenos">141</span></a>    <span class="n">trader_leverage_window_hours</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="FeatureConfig-142"><a href="#FeatureConfig-142"><span class="linenos">142</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hours for leverage rolling window&quot;</span>
+</span><span id="FeatureConfig-143"><a href="#FeatureConfig-143"><span class="linenos">143</span></a>    <span class="p">)</span>
+</span><span id="FeatureConfig-144"><a href="#FeatureConfig-144"><span class="linenos">144</span></a>    <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="FeatureConfig-145"><a href="#FeatureConfig-145"><span class="linenos">145</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/features&quot;</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Feature store output directory&quot;</span>
+</span><span id="FeatureConfig-146"><a href="#FeatureConfig-146"><span class="linenos">146</span></a>    <span class="p">)</span>
+</span><span id="FeatureConfig-147"><a href="#FeatureConfig-147"><span class="linenos">147</span></a>    <span class="n">run_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run identifier (auto-generated if empty)&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1003,7 +1068,7 @@
                             </div>
                             <div id="FeatureConfig.output_path" class="classattr">
                                 <div class="attr variable">
-            <span class="name">output_path</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">output_path</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;data/features&#39;)</span>
 
         
@@ -1041,56 +1106,56 @@
 
     </div>
     <a class="headerlink" href="#EDAConfig"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="EDAConfig-144"><a href="#EDAConfig-144"><span class="linenos">144</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EDAConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="EDAConfig-145"><a href="#EDAConfig-145"><span class="linenos">145</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the EDA pipeline stage.</span>
-</span><span id="EDAConfig-146"><a href="#EDAConfig-146"><span class="linenos">146</span></a>
-</span><span id="EDAConfig-147"><a href="#EDAConfig-147"><span class="linenos">147</span></a><span class="sd">    Attributes:</span>
-</span><span id="EDAConfig-148"><a href="#EDAConfig-148"><span class="linenos">148</span></a><span class="sd">        figures_dir: Directory for saving EDA figures.</span>
-</span><span id="EDAConfig-149"><a href="#EDAConfig-149"><span class="linenos">149</span></a><span class="sd">        tables_dir: Directory for saving EDA tables.</span>
-</span><span id="EDAConfig-150"><a href="#EDAConfig-150"><span class="linenos">150</span></a><span class="sd">        outlier_method: Method for outlier detection (iqr or zscore).</span>
-</span><span id="EDAConfig-151"><a href="#EDAConfig-151"><span class="linenos">151</span></a><span class="sd">        outlier_iqr_multiplier: IQR multiplier for outlier threshold.</span>
-</span><span id="EDAConfig-152"><a href="#EDAConfig-152"><span class="linenos">152</span></a><span class="sd">        correlation_method: Correlation method (pearson or spearman).</span>
-</span><span id="EDAConfig-153"><a href="#EDAConfig-153"><span class="linenos">153</span></a><span class="sd">        numeric_features: List of numeric columns to include in correlation analysis.</span>
-</span><span id="EDAConfig-154"><a href="#EDAConfig-154"><span class="linenos">154</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="EDAConfig-155"><a href="#EDAConfig-155"><span class="linenos">155</span></a>
-</span><span id="EDAConfig-156"><a href="#EDAConfig-156"><span class="linenos">156</span></a>    <span class="n">figures_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-157"><a href="#EDAConfig-157"><span class="linenos">157</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/figures/eda&quot;</span><span class="p">),</span>
-</span><span id="EDAConfig-158"><a href="#EDAConfig-158"><span class="linenos">158</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA figure output&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-159"><a href="#EDAConfig-159"><span class="linenos">159</span></a>    <span class="p">)</span>
-</span><span id="EDAConfig-160"><a href="#EDAConfig-160"><span class="linenos">160</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-161"><a href="#EDAConfig-161"><span class="linenos">161</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/eda&quot;</span><span class="p">),</span>
-</span><span id="EDAConfig-162"><a href="#EDAConfig-162"><span class="linenos">162</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA table output&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-163"><a href="#EDAConfig-163"><span class="linenos">163</span></a>    <span class="p">)</span>
-</span><span id="EDAConfig-164"><a href="#EDAConfig-164"><span class="linenos">164</span></a>    <span class="n">outlier_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-165"><a href="#EDAConfig-165"><span class="linenos">165</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-166"><a href="#EDAConfig-166"><span class="linenos">166</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(iqr|zscore)$&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-167"><a href="#EDAConfig-167"><span class="linenos">167</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Outlier detection method&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-168"><a href="#EDAConfig-168"><span class="linenos">168</span></a>    <span class="p">)</span>
-</span><span id="EDAConfig-169"><a href="#EDAConfig-169"><span class="linenos">169</span></a>    <span class="n">outlier_iqr_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-170"><a href="#EDAConfig-170"><span class="linenos">170</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-</span><span id="EDAConfig-171"><a href="#EDAConfig-171"><span class="linenos">171</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-</span><span id="EDAConfig-172"><a href="#EDAConfig-172"><span class="linenos">172</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;IQR multiplier for outlier threshold&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-173"><a href="#EDAConfig-173"><span class="linenos">173</span></a>    <span class="p">)</span>
-</span><span id="EDAConfig-174"><a href="#EDAConfig-174"><span class="linenos">174</span></a>    <span class="n">correlation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-175"><a href="#EDAConfig-175"><span class="linenos">175</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-176"><a href="#EDAConfig-176"><span class="linenos">176</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(pearson|spearman|kendall)$&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-177"><a href="#EDAConfig-177"><span class="linenos">177</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Correlation method&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-178"><a href="#EDAConfig-178"><span class="linenos">178</span></a>    <span class="p">)</span>
-</span><span id="EDAConfig-179"><a href="#EDAConfig-179"><span class="linenos">179</span></a>    <span class="n">numeric_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="EDAConfig-180"><a href="#EDAConfig-180"><span class="linenos">180</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span>
-</span><span id="EDAConfig-181"><a href="#EDAConfig-181"><span class="linenos">181</span></a>            <span class="s2">&quot;sentiment_value&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-182"><a href="#EDAConfig-182"><span class="linenos">182</span></a>            <span class="s2">&quot;Closed PnL&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-183"><a href="#EDAConfig-183"><span class="linenos">183</span></a>            <span class="s2">&quot;Leverage&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-184"><a href="#EDAConfig-184"><span class="linenos">184</span></a>            <span class="s2">&quot;trader_win_rate_7d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-185"><a href="#EDAConfig-185"><span class="linenos">185</span></a>            <span class="s2">&quot;trader_pnl_rolling_7d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-186"><a href="#EDAConfig-186"><span class="linenos">186</span></a>            <span class="s2">&quot;trader_pnl_rolling_30d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-187"><a href="#EDAConfig-187"><span class="linenos">187</span></a>            <span class="s2">&quot;trader_leverage_avg_24h&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-188"><a href="#EDAConfig-188"><span class="linenos">188</span></a>            <span class="s2">&quot;trader_pnl_volatility_14d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-189"><a href="#EDAConfig-189"><span class="linenos">189</span></a>            <span class="s2">&quot;trader_trade_count_7d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-190"><a href="#EDAConfig-190"><span class="linenos">190</span></a>            <span class="s2">&quot;trader_avg_size_usd_7d&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-191"><a href="#EDAConfig-191"><span class="linenos">191</span></a>        <span class="p">],</span>
-</span><span id="EDAConfig-192"><a href="#EDAConfig-192"><span class="linenos">192</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Numeric features for correlation analysis&quot;</span><span class="p">,</span>
-</span><span id="EDAConfig-193"><a href="#EDAConfig-193"><span class="linenos">193</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="EDAConfig-150"><a href="#EDAConfig-150"><span class="linenos">150</span></a><span class="k">class</span><span class="w"> </span><span class="nc">EDAConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="EDAConfig-151"><a href="#EDAConfig-151"><span class="linenos">151</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the EDA pipeline stage.</span>
+</span><span id="EDAConfig-152"><a href="#EDAConfig-152"><span class="linenos">152</span></a>
+</span><span id="EDAConfig-153"><a href="#EDAConfig-153"><span class="linenos">153</span></a><span class="sd">    Attributes:</span>
+</span><span id="EDAConfig-154"><a href="#EDAConfig-154"><span class="linenos">154</span></a><span class="sd">        figures_dir: Directory for saving EDA figures.</span>
+</span><span id="EDAConfig-155"><a href="#EDAConfig-155"><span class="linenos">155</span></a><span class="sd">        tables_dir: Directory for saving EDA tables.</span>
+</span><span id="EDAConfig-156"><a href="#EDAConfig-156"><span class="linenos">156</span></a><span class="sd">        outlier_method: Method for outlier detection (iqr or zscore).</span>
+</span><span id="EDAConfig-157"><a href="#EDAConfig-157"><span class="linenos">157</span></a><span class="sd">        outlier_iqr_multiplier: IQR multiplier for outlier threshold.</span>
+</span><span id="EDAConfig-158"><a href="#EDAConfig-158"><span class="linenos">158</span></a><span class="sd">        correlation_method: Correlation method (pearson or spearman).</span>
+</span><span id="EDAConfig-159"><a href="#EDAConfig-159"><span class="linenos">159</span></a><span class="sd">        numeric_features: List of numeric columns to include in correlation analysis.</span>
+</span><span id="EDAConfig-160"><a href="#EDAConfig-160"><span class="linenos">160</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="EDAConfig-161"><a href="#EDAConfig-161"><span class="linenos">161</span></a>
+</span><span id="EDAConfig-162"><a href="#EDAConfig-162"><span class="linenos">162</span></a>    <span class="n">figures_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-163"><a href="#EDAConfig-163"><span class="linenos">163</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/figures/eda&quot;</span><span class="p">),</span>
+</span><span id="EDAConfig-164"><a href="#EDAConfig-164"><span class="linenos">164</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA figure output&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-165"><a href="#EDAConfig-165"><span class="linenos">165</span></a>    <span class="p">)</span>
+</span><span id="EDAConfig-166"><a href="#EDAConfig-166"><span class="linenos">166</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-167"><a href="#EDAConfig-167"><span class="linenos">167</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/eda&quot;</span><span class="p">),</span>
+</span><span id="EDAConfig-168"><a href="#EDAConfig-168"><span class="linenos">168</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for EDA table output&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-169"><a href="#EDAConfig-169"><span class="linenos">169</span></a>    <span class="p">)</span>
+</span><span id="EDAConfig-170"><a href="#EDAConfig-170"><span class="linenos">170</span></a>    <span class="n">outlier_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-171"><a href="#EDAConfig-171"><span class="linenos">171</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-172"><a href="#EDAConfig-172"><span class="linenos">172</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(iqr|zscore)$&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-173"><a href="#EDAConfig-173"><span class="linenos">173</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Outlier detection method&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-174"><a href="#EDAConfig-174"><span class="linenos">174</span></a>    <span class="p">)</span>
+</span><span id="EDAConfig-175"><a href="#EDAConfig-175"><span class="linenos">175</span></a>    <span class="n">outlier_iqr_multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-176"><a href="#EDAConfig-176"><span class="linenos">176</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+</span><span id="EDAConfig-177"><a href="#EDAConfig-177"><span class="linenos">177</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="EDAConfig-178"><a href="#EDAConfig-178"><span class="linenos">178</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;IQR multiplier for outlier threshold&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-179"><a href="#EDAConfig-179"><span class="linenos">179</span></a>    <span class="p">)</span>
+</span><span id="EDAConfig-180"><a href="#EDAConfig-180"><span class="linenos">180</span></a>    <span class="n">correlation_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-181"><a href="#EDAConfig-181"><span class="linenos">181</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-182"><a href="#EDAConfig-182"><span class="linenos">182</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(pearson|spearman|kendall)$&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-183"><a href="#EDAConfig-183"><span class="linenos">183</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Correlation method&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-184"><a href="#EDAConfig-184"><span class="linenos">184</span></a>    <span class="p">)</span>
+</span><span id="EDAConfig-185"><a href="#EDAConfig-185"><span class="linenos">185</span></a>    <span class="n">numeric_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="EDAConfig-186"><a href="#EDAConfig-186"><span class="linenos">186</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span>
+</span><span id="EDAConfig-187"><a href="#EDAConfig-187"><span class="linenos">187</span></a>            <span class="s2">&quot;sentiment_value&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-188"><a href="#EDAConfig-188"><span class="linenos">188</span></a>            <span class="s2">&quot;Closed PnL&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-189"><a href="#EDAConfig-189"><span class="linenos">189</span></a>            <span class="s2">&quot;Leverage&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-190"><a href="#EDAConfig-190"><span class="linenos">190</span></a>            <span class="s2">&quot;trader_win_rate_7d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-191"><a href="#EDAConfig-191"><span class="linenos">191</span></a>            <span class="s2">&quot;trader_pnl_rolling_7d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-192"><a href="#EDAConfig-192"><span class="linenos">192</span></a>            <span class="s2">&quot;trader_pnl_rolling_30d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-193"><a href="#EDAConfig-193"><span class="linenos">193</span></a>            <span class="s2">&quot;trader_leverage_avg_24h&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-194"><a href="#EDAConfig-194"><span class="linenos">194</span></a>            <span class="s2">&quot;trader_pnl_volatility_14d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-195"><a href="#EDAConfig-195"><span class="linenos">195</span></a>            <span class="s2">&quot;trader_trade_count_7d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-196"><a href="#EDAConfig-196"><span class="linenos">196</span></a>            <span class="s2">&quot;trader_avg_size_usd_7d&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-197"><a href="#EDAConfig-197"><span class="linenos">197</span></a>        <span class="p">],</span>
+</span><span id="EDAConfig-198"><a href="#EDAConfig-198"><span class="linenos">198</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Numeric features for correlation analysis&quot;</span><span class="p">,</span>
+</span><span id="EDAConfig-199"><a href="#EDAConfig-199"><span class="linenos">199</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1111,7 +1176,7 @@
 
                             <div id="EDAConfig.figures_dir" class="classattr">
                                 <div class="attr variable">
-            <span class="name">figures_dir</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">figures_dir</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;outputs/figures/eda&#39;)</span>
 
         
@@ -1125,7 +1190,7 @@
                             </div>
                             <div id="EDAConfig.tables_dir" class="classattr">
                                 <div class="attr variable">
-            <span class="name">tables_dir</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">tables_dir</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;outputs/tables/eda&#39;)</span>
 
         
@@ -1206,40 +1271,75 @@
 
     </div>
     <a class="headerlink" href="#StatConfig"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="StatConfig-196"><a href="#StatConfig-196"><span class="linenos">196</span></a><span class="k">class</span><span class="w"> </span><span class="nc">StatConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="StatConfig-197"><a href="#StatConfig-197"><span class="linenos">197</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the statistical analysis pipeline stage.</span>
-</span><span id="StatConfig-198"><a href="#StatConfig-198"><span class="linenos">198</span></a>
-</span><span id="StatConfig-199"><a href="#StatConfig-199"><span class="linenos">199</span></a><span class="sd">    Attributes:</span>
-</span><span id="StatConfig-200"><a href="#StatConfig-200"><span class="linenos">200</span></a><span class="sd">        alpha: Significance level for hypothesis tests (default 0.05).</span>
-</span><span id="StatConfig-201"><a href="#StatConfig-201"><span class="linenos">201</span></a><span class="sd">        correction_method: Method for multiple testing correction</span>
-</span><span id="StatConfig-202"><a href="#StatConfig-202"><span class="linenos">202</span></a><span class="sd">            (bonferroni or fdr_bh).</span>
-</span><span id="StatConfig-203"><a href="#StatConfig-203"><span class="linenos">203</span></a><span class="sd">        min_sample_size: Minimum sample size per group; tests below this</span>
-</span><span id="StatConfig-204"><a href="#StatConfig-204"><span class="linenos">204</span></a><span class="sd">            are flagged as underpowered.</span>
-</span><span id="StatConfig-205"><a href="#StatConfig-205"><span class="linenos">205</span></a><span class="sd">        min_expected_frequency: Minimum expected cell frequency for chi-square;</span>
-</span><span id="StatConfig-206"><a href="#StatConfig-206"><span class="linenos">206</span></a><span class="sd">            below this, Fisher&#39;s exact test is used.</span>
-</span><span id="StatConfig-207"><a href="#StatConfig-207"><span class="linenos">207</span></a><span class="sd">        tables_dir: Directory for saving statistical output tables.</span>
-</span><span id="StatConfig-208"><a href="#StatConfig-208"><span class="linenos">208</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="StatConfig-209"><a href="#StatConfig-209"><span class="linenos">209</span></a>
-</span><span id="StatConfig-210"><a href="#StatConfig-210"><span class="linenos">210</span></a>    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level&quot;</span><span class="p">)</span>
-</span><span id="StatConfig-211"><a href="#StatConfig-211"><span class="linenos">211</span></a>    <span class="n">correction_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="StatConfig-212"><a href="#StatConfig-212"><span class="linenos">212</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;bonferroni&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-213"><a href="#StatConfig-213"><span class="linenos">213</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(bonferroni|fdr_bh)$&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-214"><a href="#StatConfig-214"><span class="linenos">214</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Multiple testing correction method&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-215"><a href="#StatConfig-215"><span class="linenos">215</span></a>    <span class="p">)</span>
-</span><span id="StatConfig-216"><a href="#StatConfig-216"><span class="linenos">216</span></a>    <span class="n">min_sample_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="StatConfig-217"><a href="#StatConfig-217"><span class="linenos">217</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-</span><span id="StatConfig-218"><a href="#StatConfig-218"><span class="linenos">218</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-</span><span id="StatConfig-219"><a href="#StatConfig-219"><span class="linenos">219</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum sample size per group&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-220"><a href="#StatConfig-220"><span class="linenos">220</span></a>    <span class="p">)</span>
-</span><span id="StatConfig-221"><a href="#StatConfig-221"><span class="linenos">221</span></a>    <span class="n">min_expected_frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="StatConfig-222"><a href="#StatConfig-222"><span class="linenos">222</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
-</span><span id="StatConfig-223"><a href="#StatConfig-223"><span class="linenos">223</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-</span><span id="StatConfig-224"><a href="#StatConfig-224"><span class="linenos">224</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum expected frequency for chi-square&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-225"><a href="#StatConfig-225"><span class="linenos">225</span></a>    <span class="p">)</span>
-</span><span id="StatConfig-226"><a href="#StatConfig-226"><span class="linenos">226</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="StatConfig-227"><a href="#StatConfig-227"><span class="linenos">227</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/statistics&quot;</span><span class="p">),</span>
-</span><span id="StatConfig-228"><a href="#StatConfig-228"><span class="linenos">228</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for statistical output tables&quot;</span><span class="p">,</span>
-</span><span id="StatConfig-229"><a href="#StatConfig-229"><span class="linenos">229</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="StatConfig-202"><a href="#StatConfig-202"><span class="linenos">202</span></a><span class="k">class</span><span class="w"> </span><span class="nc">StatConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="StatConfig-203"><a href="#StatConfig-203"><span class="linenos">203</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the statistical analysis pipeline stage.</span>
+</span><span id="StatConfig-204"><a href="#StatConfig-204"><span class="linenos">204</span></a>
+</span><span id="StatConfig-205"><a href="#StatConfig-205"><span class="linenos">205</span></a><span class="sd">    Attributes:</span>
+</span><span id="StatConfig-206"><a href="#StatConfig-206"><span class="linenos">206</span></a><span class="sd">        alpha: Significance level for hypothesis tests (default 0.05).</span>
+</span><span id="StatConfig-207"><a href="#StatConfig-207"><span class="linenos">207</span></a><span class="sd">        correction_method: Method for multiple testing correction</span>
+</span><span id="StatConfig-208"><a href="#StatConfig-208"><span class="linenos">208</span></a><span class="sd">            (bonferroni or fdr_bh).</span>
+</span><span id="StatConfig-209"><a href="#StatConfig-209"><span class="linenos">209</span></a><span class="sd">        min_sample_size: Minimum sample size per group; tests below this</span>
+</span><span id="StatConfig-210"><a href="#StatConfig-210"><span class="linenos">210</span></a><span class="sd">            are flagged as underpowered.</span>
+</span><span id="StatConfig-211"><a href="#StatConfig-211"><span class="linenos">211</span></a><span class="sd">        min_expected_frequency: Minimum expected cell frequency for chi-square;</span>
+</span><span id="StatConfig-212"><a href="#StatConfig-212"><span class="linenos">212</span></a><span class="sd">            below this, Fisher&#39;s exact test is used.</span>
+</span><span id="StatConfig-213"><a href="#StatConfig-213"><span class="linenos">213</span></a><span class="sd">        tables_dir: Directory for saving statistical output tables.</span>
+</span><span id="StatConfig-214"><a href="#StatConfig-214"><span class="linenos">214</span></a><span class="sd">        run_extended_analyses: Whether to run ET-01 through ET-07 extended tests.</span>
+</span><span id="StatConfig-215"><a href="#StatConfig-215"><span class="linenos">215</span></a><span class="sd">        regime_duration_buckets: Upper bounds for regime duration bucket groupings.</span>
+</span><span id="StatConfig-216"><a href="#StatConfig-216"><span class="linenos">216</span></a><span class="sd">        trader_segment_k_min: Minimum k for k-means trader segmentation.</span>
+</span><span id="StatConfig-217"><a href="#StatConfig-217"><span class="linenos">217</span></a><span class="sd">        trader_segment_k_max: Maximum k for k-means trader segmentation.</span>
+</span><span id="StatConfig-218"><a href="#StatConfig-218"><span class="linenos">218</span></a><span class="sd">        max_lag_days: Maximum lag in days for ET-05 extended lagged correlations.</span>
+</span><span id="StatConfig-219"><a href="#StatConfig-219"><span class="linenos">219</span></a><span class="sd">        proportion_test_alpha: Significance level for proportion tests in ET-07.</span>
+</span><span id="StatConfig-220"><a href="#StatConfig-220"><span class="linenos">220</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="StatConfig-221"><a href="#StatConfig-221"><span class="linenos">221</span></a>
+</span><span id="StatConfig-222"><a href="#StatConfig-222"><span class="linenos">222</span></a>    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level&quot;</span><span class="p">)</span>
+</span><span id="StatConfig-223"><a href="#StatConfig-223"><span class="linenos">223</span></a>    <span class="n">correction_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-224"><a href="#StatConfig-224"><span class="linenos">224</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;bonferroni&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-225"><a href="#StatConfig-225"><span class="linenos">225</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^(bonferroni|fdr_bh)$&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-226"><a href="#StatConfig-226"><span class="linenos">226</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Multiple testing correction method&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-227"><a href="#StatConfig-227"><span class="linenos">227</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-228"><a href="#StatConfig-228"><span class="linenos">228</span></a>    <span class="n">min_sample_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-229"><a href="#StatConfig-229"><span class="linenos">229</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span><span id="StatConfig-230"><a href="#StatConfig-230"><span class="linenos">230</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="StatConfig-231"><a href="#StatConfig-231"><span class="linenos">231</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum sample size per group&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-232"><a href="#StatConfig-232"><span class="linenos">232</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-233"><a href="#StatConfig-233"><span class="linenos">233</span></a>    <span class="n">min_expected_frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-234"><a href="#StatConfig-234"><span class="linenos">234</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+</span><span id="StatConfig-235"><a href="#StatConfig-235"><span class="linenos">235</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="StatConfig-236"><a href="#StatConfig-236"><span class="linenos">236</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum expected frequency for chi-square&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-237"><a href="#StatConfig-237"><span class="linenos">237</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-238"><a href="#StatConfig-238"><span class="linenos">238</span></a>    <span class="n">tables_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-239"><a href="#StatConfig-239"><span class="linenos">239</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/tables/statistics&quot;</span><span class="p">),</span>
+</span><span id="StatConfig-240"><a href="#StatConfig-240"><span class="linenos">240</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory for statistical output tables&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-241"><a href="#StatConfig-241"><span class="linenos">241</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-242"><a href="#StatConfig-242"><span class="linenos">242</span></a>    <span class="n">run_extended_analyses</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-243"><a href="#StatConfig-243"><span class="linenos">243</span></a>        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="StatConfig-244"><a href="#StatConfig-244"><span class="linenos">244</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to run extended analyses ET-01 through ET-07&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-245"><a href="#StatConfig-245"><span class="linenos">245</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-246"><a href="#StatConfig-246"><span class="linenos">246</span></a>    <span class="n">regime_duration_buckets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-247"><a href="#StatConfig-247"><span class="linenos">247</span></a>        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+</span><span id="StatConfig-248"><a href="#StatConfig-248"><span class="linenos">248</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Upper bounds for regime duration bucket groupings (days)&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-249"><a href="#StatConfig-249"><span class="linenos">249</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-250"><a href="#StatConfig-250"><span class="linenos">250</span></a>    <span class="n">trader_segment_k_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-251"><a href="#StatConfig-251"><span class="linenos">251</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="StatConfig-252"><a href="#StatConfig-252"><span class="linenos">252</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="StatConfig-253"><a href="#StatConfig-253"><span class="linenos">253</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum k for k-means trader segmentation&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-254"><a href="#StatConfig-254"><span class="linenos">254</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-255"><a href="#StatConfig-255"><span class="linenos">255</span></a>    <span class="n">trader_segment_k_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-256"><a href="#StatConfig-256"><span class="linenos">256</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+</span><span id="StatConfig-257"><a href="#StatConfig-257"><span class="linenos">257</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="StatConfig-258"><a href="#StatConfig-258"><span class="linenos">258</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum k for k-means trader segmentation&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-259"><a href="#StatConfig-259"><span class="linenos">259</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-260"><a href="#StatConfig-260"><span class="linenos">260</span></a>    <span class="n">max_lag_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-261"><a href="#StatConfig-261"><span class="linenos">261</span></a>        <span class="n">default</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+</span><span id="StatConfig-262"><a href="#StatConfig-262"><span class="linenos">262</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="StatConfig-263"><a href="#StatConfig-263"><span class="linenos">263</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum lag in days for extended lagged correlation analysis&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-264"><a href="#StatConfig-264"><span class="linenos">264</span></a>    <span class="p">)</span>
+</span><span id="StatConfig-265"><a href="#StatConfig-265"><span class="linenos">265</span></a>    <span class="n">proportion_test_alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="StatConfig-266"><a href="#StatConfig-266"><span class="linenos">266</span></a>        <span class="n">default</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+</span><span id="StatConfig-267"><a href="#StatConfig-267"><span class="linenos">267</span></a>        <span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+</span><span id="StatConfig-268"><a href="#StatConfig-268"><span class="linenos">268</span></a>        <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+</span><span id="StatConfig-269"><a href="#StatConfig-269"><span class="linenos">269</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Significance level for proportion tests in ET-07&quot;</span><span class="p">,</span>
+</span><span id="StatConfig-270"><a href="#StatConfig-270"><span class="linenos">270</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1256,6 +1356,12 @@ are flagged as underpowered.</li>
 <li><strong>min_expected_frequency:</strong>  Minimum expected cell frequency for chi-square;
 below this, Fisher's exact test is used.</li>
 <li><strong>tables_dir:</strong>  Directory for saving statistical output tables.</li>
+<li><strong>run_extended_analyses:</strong>  Whether to run ET-01 through ET-07 extended tests.</li>
+<li><strong>regime_duration_buckets:</strong>  Upper bounds for regime duration bucket groupings.</li>
+<li><strong>trader_segment_k_min:</strong>  Minimum k for k-means trader segmentation.</li>
+<li><strong>trader_segment_k_max:</strong>  Maximum k for k-means trader segmentation.</li>
+<li><strong>max_lag_days:</strong>  Maximum lag in days for ET-05 extended lagged correlations.</li>
+<li><strong>proportion_test_alpha:</strong>  Significance level for proportion tests in ET-07.</li>
 </ul>
 </div>
 
@@ -1318,7 +1424,7 @@ below this, Fisher's exact test is used.</li>
                             </div>
                             <div id="StatConfig.tables_dir" class="classattr">
                                 <div class="attr variable">
-            <span class="name">tables_dir</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">tables_dir</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;outputs/tables/statistics&#39;)</span>
 
         
@@ -1326,6 +1432,90 @@ below this, Fisher's exact test is used.</li>
     <a class="headerlink" href="#StatConfig.tables_dir"></a>
     
             <div class="docstring"><p>Directory for statistical output tables</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.run_extended_analyses" class="classattr">
+                                <div class="attr variable">
+            <span class="name">run_extended_analyses</span><span class="annotation">: bool</span>        =
+<span class="default_value">True</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.run_extended_analyses"></a>
+    
+            <div class="docstring"><p>Whether to run extended analyses ET-01 through ET-07</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.regime_duration_buckets" class="classattr">
+                                <div class="attr variable">
+            <span class="name">regime_duration_buckets</span><span class="annotation">: list[int]</span>        =
+<span class="default_value">[1, 3, 7, 14]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.regime_duration_buckets"></a>
+    
+            <div class="docstring"><p>Upper bounds for regime duration bucket groupings (days)</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.trader_segment_k_min" class="classattr">
+                                <div class="attr variable">
+            <span class="name">trader_segment_k_min</span><span class="annotation">: int</span>        =
+<span class="default_value">2</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.trader_segment_k_min"></a>
+    
+            <div class="docstring"><p>Minimum k for k-means trader segmentation</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.trader_segment_k_max" class="classattr">
+                                <div class="attr variable">
+            <span class="name">trader_segment_k_max</span><span class="annotation">: int</span>        =
+<span class="default_value">6</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.trader_segment_k_max"></a>
+    
+            <div class="docstring"><p>Maximum k for k-means trader segmentation</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.max_lag_days" class="classattr">
+                                <div class="attr variable">
+            <span class="name">max_lag_days</span><span class="annotation">: int</span>        =
+<span class="default_value">14</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.max_lag_days"></a>
+    
+            <div class="docstring"><p>Maximum lag in days for extended lagged correlation analysis</p>
+</div>
+
+
+                            </div>
+                            <div id="StatConfig.proportion_test_alpha" class="classattr">
+                                <div class="attr variable">
+            <span class="name">proportion_test_alpha</span><span class="annotation">: float</span>        =
+<span class="default_value">0.05</span>
+
+        
+    </div>
+    <a class="headerlink" href="#StatConfig.proportion_test_alpha"></a>
+    
+            <div class="docstring"><p>Significance level for proportion tests in ET-07</p>
 </div>
 
 
@@ -1342,32 +1532,32 @@ below this, Fisher's exact test is used.</li>
 
     </div>
     <a class="headerlink" href="#MLConfig"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MLConfig-232"><a href="#MLConfig-232"><span class="linenos">232</span></a><span class="k">class</span><span class="w"> </span><span class="nc">MLConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="MLConfig-233"><a href="#MLConfig-233"><span class="linenos">233</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the machine learning pipeline stage.</span>
-</span><span id="MLConfig-234"><a href="#MLConfig-234"><span class="linenos">234</span></a>
-</span><span id="MLConfig-235"><a href="#MLConfig-235"><span class="linenos">235</span></a><span class="sd">    Attributes:</span>
-</span><span id="MLConfig-236"><a href="#MLConfig-236"><span class="linenos">236</span></a><span class="sd">        random_seed: Global random seed for reproducibility.</span>
-</span><span id="MLConfig-237"><a href="#MLConfig-237"><span class="linenos">237</span></a><span class="sd">        train_cutoff_date: Chronological split cutoff date (YYYY-MM-DD).</span>
-</span><span id="MLConfig-238"><a href="#MLConfig-238"><span class="linenos">238</span></a><span class="sd">        cv_folds: Number of TimeSeriesSplit folds.</span>
-</span><span id="MLConfig-239"><a href="#MLConfig-239"><span class="linenos">239</span></a><span class="sd">        tracking_uri: Path to MLflow tracking directory.</span>
-</span><span id="MLConfig-240"><a href="#MLConfig-240"><span class="linenos">240</span></a><span class="sd">        experiment_name: MLflow experiment name.</span>
-</span><span id="MLConfig-241"><a href="#MLConfig-241"><span class="linenos">241</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="MLConfig-242"><a href="#MLConfig-242"><span class="linenos">242</span></a>
-</span><span id="MLConfig-243"><a href="#MLConfig-243"><span class="linenos">243</span></a>    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Global random seed for reproducibility&quot;</span><span class="p">)</span>
-</span><span id="MLConfig-244"><a href="#MLConfig-244"><span class="linenos">244</span></a>    <span class="n">train_cutoff_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="MLConfig-245"><a href="#MLConfig-245"><span class="linenos">245</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;2025-04-01&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-246"><a href="#MLConfig-246"><span class="linenos">246</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-247"><a href="#MLConfig-247"><span class="linenos">247</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chronological train/test split cutoff date (YYYY-MM-DD)&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-248"><a href="#MLConfig-248"><span class="linenos">248</span></a>    <span class="p">)</span>
-</span><span id="MLConfig-249"><a href="#MLConfig-249"><span class="linenos">249</span></a>    <span class="n">cv_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of TimeSeriesSplit folds&quot;</span><span class="p">)</span>
-</span><span id="MLConfig-250"><a href="#MLConfig-250"><span class="linenos">250</span></a>    <span class="n">tracking_uri</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="MLConfig-251"><a href="#MLConfig-251"><span class="linenos">251</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;experiments/mlruns&quot;</span><span class="p">),</span>
-</span><span id="MLConfig-252"><a href="#MLConfig-252"><span class="linenos">252</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow tracking URI&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-253"><a href="#MLConfig-253"><span class="linenos">253</span></a>    <span class="p">)</span>
-</span><span id="MLConfig-254"><a href="#MLConfig-254"><span class="linenos">254</span></a>    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="MLConfig-255"><a href="#MLConfig-255"><span class="linenos">255</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;ml_experiments&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-256"><a href="#MLConfig-256"><span class="linenos">256</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow experiment name&quot;</span><span class="p">,</span>
-</span><span id="MLConfig-257"><a href="#MLConfig-257"><span class="linenos">257</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MLConfig-273"><a href="#MLConfig-273"><span class="linenos">273</span></a><span class="k">class</span><span class="w"> </span><span class="nc">MLConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="MLConfig-274"><a href="#MLConfig-274"><span class="linenos">274</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for the machine learning pipeline stage.</span>
+</span><span id="MLConfig-275"><a href="#MLConfig-275"><span class="linenos">275</span></a>
+</span><span id="MLConfig-276"><a href="#MLConfig-276"><span class="linenos">276</span></a><span class="sd">    Attributes:</span>
+</span><span id="MLConfig-277"><a href="#MLConfig-277"><span class="linenos">277</span></a><span class="sd">        random_seed: Global random seed for reproducibility.</span>
+</span><span id="MLConfig-278"><a href="#MLConfig-278"><span class="linenos">278</span></a><span class="sd">        train_cutoff_date: Chronological split cutoff date (YYYY-MM-DD).</span>
+</span><span id="MLConfig-279"><a href="#MLConfig-279"><span class="linenos">279</span></a><span class="sd">        cv_folds: Number of TimeSeriesSplit folds.</span>
+</span><span id="MLConfig-280"><a href="#MLConfig-280"><span class="linenos">280</span></a><span class="sd">        tracking_uri: Path to MLflow tracking directory.</span>
+</span><span id="MLConfig-281"><a href="#MLConfig-281"><span class="linenos">281</span></a><span class="sd">        experiment_name: MLflow experiment name.</span>
+</span><span id="MLConfig-282"><a href="#MLConfig-282"><span class="linenos">282</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="MLConfig-283"><a href="#MLConfig-283"><span class="linenos">283</span></a>
+</span><span id="MLConfig-284"><a href="#MLConfig-284"><span class="linenos">284</span></a>    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Global random seed for reproducibility&quot;</span><span class="p">)</span>
+</span><span id="MLConfig-285"><a href="#MLConfig-285"><span class="linenos">285</span></a>    <span class="n">train_cutoff_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="MLConfig-286"><a href="#MLConfig-286"><span class="linenos">286</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;2025-04-01&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-287"><a href="#MLConfig-287"><span class="linenos">287</span></a>        <span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-288"><a href="#MLConfig-288"><span class="linenos">288</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Chronological train/test split cutoff date (YYYY-MM-DD)&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-289"><a href="#MLConfig-289"><span class="linenos">289</span></a>    <span class="p">)</span>
+</span><span id="MLConfig-290"><a href="#MLConfig-290"><span class="linenos">290</span></a>    <span class="n">cv_folds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of TimeSeriesSplit folds&quot;</span><span class="p">)</span>
+</span><span id="MLConfig-291"><a href="#MLConfig-291"><span class="linenos">291</span></a>    <span class="n">tracking_uri</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="MLConfig-292"><a href="#MLConfig-292"><span class="linenos">292</span></a>        <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;experiments/mlruns&quot;</span><span class="p">),</span>
+</span><span id="MLConfig-293"><a href="#MLConfig-293"><span class="linenos">293</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow tracking URI&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-294"><a href="#MLConfig-294"><span class="linenos">294</span></a>    <span class="p">)</span>
+</span><span id="MLConfig-295"><a href="#MLConfig-295"><span class="linenos">295</span></a>    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="MLConfig-296"><a href="#MLConfig-296"><span class="linenos">296</span></a>        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;ml_experiments&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-297"><a href="#MLConfig-297"><span class="linenos">297</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;MLflow experiment name&quot;</span><span class="p">,</span>
+</span><span id="MLConfig-298"><a href="#MLConfig-298"><span class="linenos">298</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1429,7 +1619,7 @@ below this, Fisher's exact test is used.</li>
                             </div>
                             <div id="MLConfig.tracking_uri" class="classattr">
                                 <div class="attr variable">
-            <span class="name">tracking_uri</span><span class="annotation">: pathlib.Path</span>        =
+            <span class="name">tracking_uri</span><span class="annotation">: pathlib._local.Path</span>        =
 <span class="default_value">PosixPath(&#39;experiments/mlruns&#39;)</span>
 
         
@@ -1467,19 +1657,19 @@ below this, Fisher's exact test is used.</li>
 
     </div>
     <a class="headerlink" href="#AppConfig"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="AppConfig-260"><a href="#AppConfig-260"><span class="linenos">260</span></a><span class="k">class</span><span class="w"> </span><span class="nc">AppConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="AppConfig-261"><a href="#AppConfig-261"><span class="linenos">261</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-level application configuration.</span>
-</span><span id="AppConfig-262"><a href="#AppConfig-262"><span class="linenos">262</span></a>
-</span><span id="AppConfig-263"><a href="#AppConfig-263"><span class="linenos">263</span></a><span class="sd">    Wraps pipeline-specific configs under top-level keys.</span>
-</span><span id="AppConfig-264"><a href="#AppConfig-264"><span class="linenos">264</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="AppConfig-265"><a href="#AppConfig-265"><span class="linenos">265</span></a>
-</span><span id="AppConfig-266"><a href="#AppConfig-266"><span class="linenos">266</span></a>    <span class="n">ingestion</span><span class="p">:</span> <span class="n">IngestionConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">IngestionConfig</span><span class="p">)</span>
-</span><span id="AppConfig-267"><a href="#AppConfig-267"><span class="linenos">267</span></a>    <span class="n">validation</span><span class="p">:</span> <span class="n">ValidationConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ValidationConfig</span><span class="p">)</span>
-</span><span id="AppConfig-268"><a href="#AppConfig-268"><span class="linenos">268</span></a>    <span class="n">preprocessing</span><span class="p">:</span> <span class="n">PreprocessingConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">PreprocessingConfig</span><span class="p">)</span>
-</span><span id="AppConfig-269"><a href="#AppConfig-269"><span class="linenos">269</span></a>    <span class="n">feature_engineering</span><span class="p">:</span> <span class="n">FeatureConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">FeatureConfig</span><span class="p">)</span>
-</span><span id="AppConfig-270"><a href="#AppConfig-270"><span class="linenos">270</span></a>    <span class="n">eda</span><span class="p">:</span> <span class="n">EDAConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">EDAConfig</span><span class="p">)</span>
-</span><span id="AppConfig-271"><a href="#AppConfig-271"><span class="linenos">271</span></a>    <span class="n">statistics</span><span class="p">:</span> <span class="n">StatConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StatConfig</span><span class="p">)</span>
-</span><span id="AppConfig-272"><a href="#AppConfig-272"><span class="linenos">272</span></a>    <span class="n">ml</span><span class="p">:</span> <span class="n">MLConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">MLConfig</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="AppConfig-301"><a href="#AppConfig-301"><span class="linenos">301</span></a><span class="k">class</span><span class="w"> </span><span class="nc">AppConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="AppConfig-302"><a href="#AppConfig-302"><span class="linenos">302</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Top-level application configuration.</span>
+</span><span id="AppConfig-303"><a href="#AppConfig-303"><span class="linenos">303</span></a>
+</span><span id="AppConfig-304"><a href="#AppConfig-304"><span class="linenos">304</span></a><span class="sd">    Wraps pipeline-specific configs under top-level keys.</span>
+</span><span id="AppConfig-305"><a href="#AppConfig-305"><span class="linenos">305</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="AppConfig-306"><a href="#AppConfig-306"><span class="linenos">306</span></a>
+</span><span id="AppConfig-307"><a href="#AppConfig-307"><span class="linenos">307</span></a>    <span class="n">ingestion</span><span class="p">:</span> <span class="n">IngestionConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">IngestionConfig</span><span class="p">)</span>
+</span><span id="AppConfig-308"><a href="#AppConfig-308"><span class="linenos">308</span></a>    <span class="n">validation</span><span class="p">:</span> <span class="n">ValidationConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ValidationConfig</span><span class="p">)</span>
+</span><span id="AppConfig-309"><a href="#AppConfig-309"><span class="linenos">309</span></a>    <span class="n">preprocessing</span><span class="p">:</span> <span class="n">PreprocessingConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">PreprocessingConfig</span><span class="p">)</span>
+</span><span id="AppConfig-310"><a href="#AppConfig-310"><span class="linenos">310</span></a>    <span class="n">feature_engineering</span><span class="p">:</span> <span class="n">FeatureConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">FeatureConfig</span><span class="p">)</span>
+</span><span id="AppConfig-311"><a href="#AppConfig-311"><span class="linenos">311</span></a>    <span class="n">eda</span><span class="p">:</span> <span class="n">EDAConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">EDAConfig</span><span class="p">)</span>
+</span><span id="AppConfig-312"><a href="#AppConfig-312"><span class="linenos">312</span></a>    <span class="n">statistics</span><span class="p">:</span> <span class="n">StatConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StatConfig</span><span class="p">)</span>
+</span><span id="AppConfig-313"><a href="#AppConfig-313"><span class="linenos">313</span></a>    <span class="n">ml</span><span class="p">:</span> <span class="n">MLConfig</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">MLConfig</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1579,27 +1769,27 @@ below this, Fisher's exact test is used.</li>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">load_config</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span></span><span class="return-annotation">) -> <span class="n"><a href="#AppConfig">AppConfig</a></span>:</span></span>
+        <span class="name">load_config</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">Path</span></span><span class="return-annotation">) -> <span class="n"><a href="#AppConfig">AppConfig</a></span>:</span></span>
 
                 <label class="view-source-button" for="load_config-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#load_config"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="load_config-275"><a href="#load_config-275"><span class="linenos">275</span></a><span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
-</span><span id="load_config-276"><a href="#load_config-276"><span class="linenos">276</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load and validate application configuration from a YAML file.</span>
-</span><span id="load_config-277"><a href="#load_config-277"><span class="linenos">277</span></a>
-</span><span id="load_config-278"><a href="#load_config-278"><span class="linenos">278</span></a><span class="sd">    Args:</span>
-</span><span id="load_config-279"><a href="#load_config-279"><span class="linenos">279</span></a><span class="sd">        path: Path to the YAML configuration file.</span>
-</span><span id="load_config-280"><a href="#load_config-280"><span class="linenos">280</span></a>
-</span><span id="load_config-281"><a href="#load_config-281"><span class="linenos">281</span></a><span class="sd">    Returns:</span>
-</span><span id="load_config-282"><a href="#load_config-282"><span class="linenos">282</span></a><span class="sd">        A validated AppConfig instance.</span>
-</span><span id="load_config-283"><a href="#load_config-283"><span class="linenos">283</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="load_config-284"><a href="#load_config-284"><span class="linenos">284</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</span><span id="load_config-285"><a href="#load_config-285"><span class="linenos">285</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-</span><span id="load_config-286"><a href="#load_config-286"><span class="linenos">286</span></a>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration file not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="load_config-287"><a href="#load_config-287"><span class="linenos">287</span></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="load_config-288"><a href="#load_config-288"><span class="linenos">288</span></a>        <span class="n">raw</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="load_config-289"><a href="#load_config-289"><span class="linenos">289</span></a>    <span class="k">return</span> <span class="n">AppConfig</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="load_config-316"><a href="#load_config-316"><span class="linenos">316</span></a><span class="k">def</span><span class="w"> </span><span class="nf">load_config</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
+</span><span id="load_config-317"><a href="#load_config-317"><span class="linenos">317</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Load and validate application configuration from a YAML file.</span>
+</span><span id="load_config-318"><a href="#load_config-318"><span class="linenos">318</span></a>
+</span><span id="load_config-319"><a href="#load_config-319"><span class="linenos">319</span></a><span class="sd">    Args:</span>
+</span><span id="load_config-320"><a href="#load_config-320"><span class="linenos">320</span></a><span class="sd">        path: Path to the YAML configuration file.</span>
+</span><span id="load_config-321"><a href="#load_config-321"><span class="linenos">321</span></a>
+</span><span id="load_config-322"><a href="#load_config-322"><span class="linenos">322</span></a><span class="sd">    Returns:</span>
+</span><span id="load_config-323"><a href="#load_config-323"><span class="linenos">323</span></a><span class="sd">        A validated AppConfig instance.</span>
+</span><span id="load_config-324"><a href="#load_config-324"><span class="linenos">324</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="load_config-325"><a href="#load_config-325"><span class="linenos">325</span></a>    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span id="load_config-326"><a href="#load_config-326"><span class="linenos">326</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+</span><span id="load_config-327"><a href="#load_config-327"><span class="linenos">327</span></a>        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration file not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="load_config-328"><a href="#load_config-328"><span class="linenos">328</span></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="load_config-329"><a href="#load_config-329"><span class="linenos">329</span></a>        <span class="n">raw</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="load_config-330"><a href="#load_config-330"><span class="linenos">330</span></a>    <span class="k">return</span> <span class="n">AppConfig</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
 </span></pre></div>
 
 

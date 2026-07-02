@@ -103,7 +103,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
 </span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTuple</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">NamedTuple</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -124,7 +124,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
 </span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>
 </span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
 </span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>    <span class="n">n_outliers</span><span class="p">:</span> <span class="nb">int</span>
 </span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>    <span class="n">outlier_indices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 </span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>    <span class="n">lower_bound</span><span class="p">:</span> <span class="nb">float</span>
@@ -205,7 +205,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
 </span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
 </span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 </span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OutlierReport</span><span class="p">:</span>
 </span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute outlier summary for a numeric column.</span>
 </span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
@@ -286,7 +286,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
 </span><span id="OutlierReport-28"><a href="#OutlierReport-28"><span class="linenos">28</span></a>
 </span><span id="OutlierReport-29"><a href="#OutlierReport-29"><span class="linenos">29</span></a>    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
 </span><span id="OutlierReport-30"><a href="#OutlierReport-30"><span class="linenos">30</span></a>    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="OutlierReport-31"><a href="#OutlierReport-31"><span class="linenos">31</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>
+</span><span id="OutlierReport-31"><a href="#OutlierReport-31"><span class="linenos">31</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 </span><span id="OutlierReport-32"><a href="#OutlierReport-32"><span class="linenos">32</span></a>    <span class="n">n_outliers</span><span class="p">:</span> <span class="nb">int</span>
 </span><span id="OutlierReport-33"><a href="#OutlierReport-33"><span class="linenos">33</span></a>    <span class="n">outlier_indices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 </span><span id="OutlierReport-34"><a href="#OutlierReport-34"><span class="linenos">34</span></a>    <span class="n">lower_bound</span><span class="p">:</span> <span class="nb">float</span>
@@ -313,7 +313,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
                             <div id="OutlierReport.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">OutlierReport</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">column</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">method</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>,</span><span class="param">	<span class="n">n_outliers</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">outlier_indices</span><span class="p">:</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;np.ndarray&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">lower_bound</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">upper_bound</span><span class="p">:</span> <span class="nb">float</span></span>)</span>
+        <span class="name">OutlierReport</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">column</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">method</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">config</span><span class="p">:</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;dict[str, Any]&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">n_outliers</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">outlier_indices</span><span class="p">:</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;np.ndarray&#39;</span><span class="p">)</span>,</span><span class="param">	<span class="n">lower_bound</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">upper_bound</span><span class="p">:</span> <span class="nb">float</span></span>)</span>
 
         
     </div>
@@ -352,7 +352,7 @@ missingness reports, and outlier summaries from a DataFrame.</p>
                             </div>
                             <div id="OutlierReport.config" class="classattr">
                                 <div class="attr variable">
-            <span class="name">config</span><span class="annotation">: dict</span>
+            <span class="name">config</span><span class="annotation">: dict[str, typing.Any]</span>
 
         
     </div>
@@ -563,7 +563,7 @@ DataFrame.</li>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">compute_outlier_summary</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span>,</span><span class="param">	<span class="n">column</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;iqr&#39;</span>,</span><span class="param">	<span class="n">config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#OutlierReport">OutlierReport</a></span>:</span></span>
+        <span class="name">compute_outlier_summary</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span>,</span><span class="param">	<span class="n">column</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;iqr&#39;</span>,</span><span class="param">	<span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#OutlierReport">OutlierReport</a></span>:</span></span>
 
                 <label class="view-source-button" for="compute_outlier_summary-view-source"><span>View Source</span></label>
 
@@ -573,7 +573,7 @@ DataFrame.</li>
 </span><span id="compute_outlier_summary-109"><a href="#compute_outlier_summary-109"><span class="linenos">109</span></a>    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
 </span><span id="compute_outlier_summary-110"><a href="#compute_outlier_summary-110"><span class="linenos">110</span></a>    <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 </span><span id="compute_outlier_summary-111"><a href="#compute_outlier_summary-111"><span class="linenos">111</span></a>    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
-</span><span id="compute_outlier_summary-112"><a href="#compute_outlier_summary-112"><span class="linenos">112</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="compute_outlier_summary-112"><a href="#compute_outlier_summary-112"><span class="linenos">112</span></a>    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="compute_outlier_summary-113"><a href="#compute_outlier_summary-113"><span class="linenos">113</span></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OutlierReport</span><span class="p">:</span>
 </span><span id="compute_outlier_summary-114"><a href="#compute_outlier_summary-114"><span class="linenos">114</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute outlier summary for a numeric column.</span>
 </span><span id="compute_outlier_summary-115"><a href="#compute_outlier_summary-115"><span class="linenos">115</span></a>

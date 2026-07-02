@@ -1,0 +1,27 @@
+# Repository code ownership and review routing.
+# Each line specifies a file pattern and the team/individual responsible.
+
+# Default owners for everything
+* @your-org/quantitative-research
+
+# Core pipeline logic — requires subject-matter expert review
+src/sentiment_trader_analytics/ingestion/ @your-org/data-engineering
+src/sentiment_trader_analytics/validation/ @your-org/data-engineering
+src/sentiment_trader_analytics/preprocessing/ @your-org/data-engineering
+src/sentiment_trader_analytics/feature_engineering/ @your-org/data-science
+src/sentiment_trader_analytics/statistics/ @your-org/quantitative-research
+src/sentiment_trader_analytics/ml/ @your-org/ml-engineering
+src/sentiment_trader_analytics/business/ @your-org/quantitative-research
+
+# Configuration changes require review
+configs/ @your-org/data-engineering
+
+# Pipeline orchestrators
+pipelines/ @your-org/data-engineering
+
+# Documentation
+docs/ @your-org/technical-writing
+README.md @your-org/technical-writing
+
+# CI/CD
+.github/workflows/ @your-org/devops

@@ -1,0 +1,21 @@
+# Reporting pipeline configuration (Phase 09).
+# Governs final report and executive summary generation per SS 11.8 of CLAUDE.md.
+
+output_dir: "outputs/reports"
+presentation_assets_dir: "outputs/presentation_assets"
+presentation_dpi: 300
+
+# Required upstream artifacts for pre-check
+required_artifacts:
+  - "outputs/figures/eda/pnl_by_sentiment_boxplot.png"
+  - "outputs/figures/eda/sentiment_value_timeseries.png"
+  - "outputs/figures/eda/feature_correlation_heatmap.png"
+  - "outputs/figures/eda/sentiment_regime_frequency_barplot.png"
+  - "outputs/tables/statistics/all_hypothesis_tests.csv"
+  - "outputs/tables/statistics/spearman_correlation_matrix.csv"
+  - "outputs/reports/insights_draft.md"
+
+# Report metadata
+report_title: "Bitcoin Sentiment Trader Performance Analysis"
+report_subtitle: "Final Report — Statistical & Behavioral Analysis"
+executive_title: "Executive Summary — Key Findings & Recommendations"

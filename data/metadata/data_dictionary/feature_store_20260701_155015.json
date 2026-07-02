@@ -1,0 +1,164 @@
+{
+  "dataset": "feature_store",
+  "run_id": "20260701_155015",
+  "timestamp": "2026-07-01T15:50:15.780991+00:00",
+  "row_count": 2810,
+  "columns": {
+    "Account": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Coin": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Execution Price": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Size Tokens": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Size USD": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Side": {
+      "dtype": "category",
+      "null_count": 0
+    },
+    "Timestamp IST": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Start Position": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Direction": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Closed PnL": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Transaction Hash": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Order ID": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Crossed": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "Fee": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Trade ID": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Timestamp": {
+      "dtype": "datetime64[ns, UTC]",
+      "null_count": 0
+    },
+    "trade_date_utc": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "sentiment_date": {
+      "dtype": "object",
+      "null_count": 456
+    },
+    "sentiment_value": {
+      "dtype": "float64",
+      "null_count": 456
+    },
+    "sentiment_classification": {
+      "dtype": "category",
+      "null_count": 456
+    },
+    "sentiment_missing": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "sentiment_value_lag_1d": {
+      "dtype": "float64",
+      "null_count": 456
+    },
+    "sentiment_regime_encoded": {
+      "dtype": "int8",
+      "null_count": 0
+    },
+    "sentiment_value_rolling_7d": {
+      "dtype": "float64",
+      "null_count": 381
+    },
+    "sentiment_is_fear": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "sentiment_is_greed": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "trader_win_rate_7d": {
+      "dtype": "float64",
+      "null_count": 1047
+    },
+    "trader_pnl_rolling_7d": {
+      "dtype": "float64",
+      "null_count": 30
+    },
+    "trader_pnl_rolling_30d": {
+      "dtype": "float64",
+      "null_count": 30
+    },
+    "Leverage": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "trader_leverage_avg_24h": {
+      "dtype": "float64",
+      "null_count": 30
+    },
+    "trader_pnl_volatility_14d": {
+      "dtype": "float64",
+      "null_count": 60
+    },
+    "trader_trade_count_7d": {
+      "dtype": "float64",
+      "null_count": 30
+    },
+    "trader_avg_size_usd_7d": {
+      "dtype": "float64",
+      "null_count": 30
+    },
+    "feature_cold_start": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "time_hour_utc": {
+      "dtype": "int8",
+      "null_count": 0
+    },
+    "time_day_of_week": {
+      "dtype": "int8",
+      "null_count": 0
+    },
+    "time_is_weekend": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "time_month": {
+      "dtype": "int8",
+      "null_count": 0
+    }
+  }
+}

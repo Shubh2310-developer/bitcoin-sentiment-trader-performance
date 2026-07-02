@@ -1,0 +1,17 @@
+dataset: "fear_greed"
+path: "data/raw/fear_greed/fear_greed_index.csv"
+schema:
+  columns:
+    - name: "timestamp"
+      type: "datetime64[UTC]"
+      nullable: false
+    - name: "value"
+      type: "int64"
+      nullable: false
+    - name: "classification"
+      type: "categorical"
+      nullable: false
+  expected_columns:
+    - "timestamp"
+    - "value"
+    - "classification"

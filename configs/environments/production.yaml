@@ -1,0 +1,19 @@
+# Production environment overrides.
+# Strictest validation and full pipeline settings for release runs.
+ingestion:
+  chunk_size: 50000
+validation:
+  min_temporal_coverage_days: 365
+  min_distinct_accounts: 5
+preprocessing:
+  interim_output_format: parquet
+  fan_out_tolerance_fraction: 0.01
+eda:
+  outlier_method: iqr
+  outlier_iqr_multiplier: 1.5
+statistics:
+  alpha: 0.05
+  correction_method: bonferroni
+ml:
+  random_seed: 42
+  cv_folds: 10

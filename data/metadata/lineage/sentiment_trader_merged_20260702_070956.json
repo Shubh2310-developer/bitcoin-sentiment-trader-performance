@@ -1,0 +1,16 @@
+{
+  "pipeline": "preprocessing",
+  "dataset": "sentiment_trader_merged",
+  "timestamp": "2026-07-02T07:09:56.853594+00:00",
+  "source_datasets": [
+    "fear_greed",
+    "trader_history"
+  ],
+  "transformations": [
+    "clean_fear_greed",
+    "clean_trader_history",
+    "extract_trade_date",
+    "merge_sentiment_and_trades"
+  ],
+  "row_count": 2810
+}

@@ -1,0 +1,19 @@
+feature_engineering:
+  sentiment_lag_days: 1
+  sentiment_rolling_window: 7
+  sentiment_regime_encoding:
+    Extreme Fear: 0
+    Fear: 1
+    Neutral: 2
+    Greed: 3
+    Extreme Greed: 4
+  trader_rolling_windows:
+    win_rate: 7
+    pnl_7d: 7
+    pnl_30d: 30
+    trade_count: 7
+    avg_size: 7
+    pnl_volatility: 14
+  trader_leverage_window_hours: 24
+  output_path: "data/features"
+  run_id: ""

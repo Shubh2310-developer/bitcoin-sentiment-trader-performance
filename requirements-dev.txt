@@ -1,0 +1,13 @@
+# Generated from pyproject.toml — do not edit manually.
+# Dev / CI dependencies (add to project.optional-dependencies in pyproject.toml)
+pytest>=7.0
+pytest-cov>=4.0
+ruff>=0.1
+mypy>=1.0
+black>=23.0
+isort>=5.0
+interrogate>=1.7
+nbconvert>=7.0
+papermill>=2.7
+pdoc>=16
+nbstripout>=0.7

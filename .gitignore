@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+*.so
+
+# Virtual environments
+.venv/
+venv/
+.env
+
+# Conda
+.conda/
+
+# Data — raw is ignored (must be acquired separately)
+data/raw/
+data/external/
+
+# Generated data (reproducible from pipeline)
+data/interim/
+data/processed/
+data/features/
+data/generated/
+
+# Outputs (reproducible from pipeline)
+outputs/
+logs/
+
+# Experiment tracking
+experiments/mlruns/
+experiments/experiment_configs/
+experiments/experiment_logs/
+mlflow.db
+
+# Testing & coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Type checking
+.mypy_cache/
+.typeshed/
+
+# Linting
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker/.dockerignore
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Agent skills & config (project-specific, not portable)
+.claude/
+
+# Environment lock (generated)
+environment/environment.lock

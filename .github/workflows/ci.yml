@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black isort ruff mypy interrogate
+      - name: Check formatting (black)
+        run: black --check --line-length 100 src/ tests/ pipelines/
+      - name: Check imports (isort)
+        run: isort --check-only --profile black src/ tests/ pipelines/
+      - name: Lint (ruff)
+        run: ruff check src/ tests/ pipelines/
+      - name: Type check (mypy --strict)
+        run: mypy --strict src/sentiment_trader_analytics/
+      - name: Docstring coverage (interrogate)
+        run: interrogate src/sentiment_trader_analytics/ --fail-under 100
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+      - name: Run tests with coverage
+        run: |
+          python -m pytest tests/ \
+            --cov=src/sentiment_trader_analytics/ \
+            --cov-fail-under=85 \
+            --cov-report=term-missing

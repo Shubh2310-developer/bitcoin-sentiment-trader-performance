@@ -1,0 +1,23 @@
+# Validation pipeline configuration (Phase 02).
+# Governs schema and quality check parameters per §5 and §11.2 of CLAUDE.md.
+validation:
+  min_temporal_coverage_days: 365
+  min_distinct_accounts: 3
+  expected_value_range:
+    - 0
+    - 100
+  # Fear & Greed schema checks
+  fear_greed:
+    check_date_parseability: true
+    check_value_range: true
+    check_classification_consistency: true
+  # Trader history schema checks
+  trader_history:
+    check_non_null_account: true
+    check_non_null_trade_id: true
+    check_trade_id_uniqueness: true
+    check_timestamp_parseability: true
+    check_side_domain: true
+    check_direction_domain: true
+    check_positive_size_usd: true
+    check_positive_execution_price: true

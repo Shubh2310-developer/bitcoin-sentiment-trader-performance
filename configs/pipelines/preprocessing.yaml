@@ -1,0 +1,6 @@
+preprocessing:
+  interim_output_format: "parquet"
+  processed_output_path: "data/processed"
+  fan_out_tolerance_fraction: 0.0
+  null_strategy_fear_greed: "drop"
+  null_strategy_trader: "drop"

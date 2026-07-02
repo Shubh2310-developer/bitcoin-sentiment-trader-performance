@@ -1,0 +1,91 @@
+{
+  "dataset": "sentiment_trader_merged",
+  "timestamp": "2026-07-02T05:23:57.585775+00:00",
+  "row_count": 2810,
+  "columns": {
+    "Account": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Coin": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Execution Price": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Size Tokens": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Size USD": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Side": {
+      "dtype": "category",
+      "null_count": 0
+    },
+    "Timestamp IST": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Start Position": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Direction": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Closed PnL": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Transaction Hash": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Order ID": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Crossed": {
+      "dtype": "bool",
+      "null_count": 0
+    },
+    "Fee": {
+      "dtype": "float64",
+      "null_count": 0
+    },
+    "Trade ID": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "Timestamp": {
+      "dtype": "datetime64[ns, UTC]",
+      "null_count": 0
+    },
+    "trade_date_utc": {
+      "dtype": "object",
+      "null_count": 0
+    },
+    "sentiment_date": {
+      "dtype": "object",
+      "null_count": 456
+    },
+    "sentiment_value": {
+      "dtype": "float64",
+      "null_count": 456
+    },
+    "sentiment_classification": {
+      "dtype": "category",
+      "null_count": 456
+    },
+    "sentiment_missing": {
+      "dtype": "bool",
+      "null_count": 0
+    }
+  }
+}

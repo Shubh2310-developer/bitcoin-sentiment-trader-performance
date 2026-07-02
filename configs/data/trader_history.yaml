@@ -1,0 +1,41 @@
+dataset: "trader_history"
+path: "data/raw/trader_history/historical_data.csv"
+schema:
+  columns:
+    - name: "Trade ID"
+      type: "str"
+      nullable: false
+    - name: "Account"
+      type: "str"
+      nullable: false
+    - name: "Timestamp"
+      type: "datetime64[UTC]"
+      nullable: false
+    - name: "Side"
+      type: "categorical"
+      nullable: false
+    - name: "Direction"
+      type: "categorical"
+      nullable: false
+    - name: "Size USD"
+      type: "float64"
+      nullable: false
+    - name: "Execution Price"
+      type: "float64"
+      nullable: false
+    - name: "Closed PnL"
+      type: "float64"
+      nullable: true
+    - name: "Fee"
+      type: "float64"
+      nullable: true
+  required_columns:
+    - "Account"
+    - "Timestamp"
+    - "Side"
+    - "Direction"
+    - "Size USD"
+    - "Execution Price"
+    - "Closed PnL"
+    - "Fee"
+    - "Trade ID"

@@ -1,0 +1,18 @@
+# Local development environment overrides.
+# Loaded on top of configs/base.yaml for local machine execution.
+ingestion:
+  chunk_size: 10000
+validation:
+  min_temporal_coverage_days: 30
+  min_distinct_accounts: 1
+preprocessing:
+  interim_output_format: parquet
+eda:
+  outlier_method: iqr
+  outlier_iqr_multiplier: 1.5
+statistics:
+  alpha: 0.05
+  correction_method: bonferroni
+ml:
+  random_seed: 42
+  cv_folds: 3

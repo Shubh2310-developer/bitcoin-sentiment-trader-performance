@@ -1,0 +1,6 @@
+ml:
+  random_seed: 42
+  train_cutoff_date: "2025-04-01"
+  cv_folds: 5
+  tracking_uri: "experiments/mlruns"
+  experiment_name: "ml_experiments"

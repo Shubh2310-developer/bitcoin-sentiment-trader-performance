@@ -1,0 +1,17 @@
+output:
+  figures_dir: "outputs/figures/eda"
+  tables_dir: "outputs/tables/eda"
+outlier_method: "iqr"
+outlier_iqr_multiplier: 1.5
+correlation_method: "spearman"
+numeric_features:
+  - sentiment_value
+  - Closed PnL
+  - Leverage
+  - trader_win_rate_7d
+  - trader_pnl_rolling_7d
+  - trader_pnl_rolling_30d
+  - trader_leverage_avg_24h
+  - trader_pnl_volatility_14d
+  - trader_trade_count_7d
+  - trader_avg_size_usd_7d

@@ -1,0 +1,10 @@
+{
+  "dataset": "trader_history",
+  "run_id": "20260702_070956",
+  "source_file": "/home/agentrogue/bitcoin-sentiment-trader-performance/data/raw/trader_history/historical_data.csv",
+  "sha256": "f02bcb03b6a99ba69d37b8d9db1edd998c6092369f676361b360d4a7601ed5a9",
+  "row_count": 211224,
+  "chunk_count": 5,
+  "ingestion_timestamp_utc": "2026-07-02T07:09:56.703038+00:00",
+  "timestamp": "2026-07-02T07:09:56.703051+00:00"
+}

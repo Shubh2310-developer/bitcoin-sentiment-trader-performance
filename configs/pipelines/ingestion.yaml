@@ -1,0 +1,4 @@
+fear_greed_path: "data/raw/fear_greed/fear_greed_index.csv"
+trader_history_path: "data/raw/trader_history/historical_data.csv"
+chunk_size: 50000
+lineage_output_dir: "data/metadata/lineage"

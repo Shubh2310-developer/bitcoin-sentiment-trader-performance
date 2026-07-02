@@ -1,0 +1,26 @@
+{
+  "pipeline": "feature_engineering",
+  "dataset": "feature_store",
+  "run_id": "20260702_052404",
+  "timestamp": "2026-07-02T05:24:05.107493+00:00",
+  "source_datasets": [
+    "sentiment_trader_merged"
+  ],
+  "transformations": [
+    "add_sentiment_lag",
+    "add_sentiment_regime_encoding",
+    "add_sentiment_rolling_mean",
+    "add_sentiment_fear_greed_flags",
+    "add_trader_win_rate",
+    "add_trader_pnl_rolling",
+    "add_trader_leverage_avg",
+    "add_trader_pnl_volatility",
+    "add_trader_trade_count",
+    "add_trader_avg_size",
+    "flag_cold_start_rows",
+    "add_time_of_day",
+    "add_day_of_week",
+    "add_month"
+  ],
+  "row_count": 2810
+}

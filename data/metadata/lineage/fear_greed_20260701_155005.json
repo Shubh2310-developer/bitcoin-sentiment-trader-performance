@@ -1,0 +1,9 @@
+{
+  "dataset": "fear_greed",
+  "run_id": "20260701_155005",
+  "source_file": "/home/agentrogue/bitcoin-sentiment-trader-performance/data/raw/fear_greed/fear_greed_index.csv",
+  "sha256": "0e2a865e90c306c21aca95c3b8f1fc1062805222d2f77c5b2e6beb4cd9327582",
+  "row_count": 2644,
+  "ingestion_timestamp_utc": "2026-07-01T15:50:05.596124+00:00",
+  "timestamp": "2026-07-01T15:50:05.596124+00:00"
+}

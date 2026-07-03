@@ -350,13 +350,12 @@ All CI checks pass on the v1.0.0 release commit.
 | [docs/methodology.md](docs/methodology.md) | Analytical decisions: test selection, null handling, feature design |
 | [docs/data_dictionary.md](docs/data_dictionary.md) | All columns across raw, processed, and feature datasets |
 | [docs/api_reference/](docs/api_reference/) | Auto-generated API documentation from Google-style docstrings (27 files) |
-| [.claude/CLAUDE.md](.claude/CLAUDE.md) | Binding engineering constitution (governance, standards, rules) |
 
 ---
 
 ## Governance
 
-This repository is governed by CLAUDE.md — a binding engineering constitution that applies to all contributors (human and AI). Key governance principles:
+Key governance principles for this repository:
 
 - **Reproducibility over convenience**: Every result must be regenerable from `raw data + config + code`.
 - **Immutable raw data**: Files under `data/raw/` are never edited, overwritten, or fixed in place.
@@ -374,4 +373,4 @@ See [LICENSE](LICENSE).
 
 ---
 
-*Generated from commit v1.0.0 — Full end-to-end verification completed 2026-07-02. 180 tests passing, 87.43% coverage, all CI checks clean.*
+
